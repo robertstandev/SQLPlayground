@@ -80,8 +80,9 @@ SELECT
 -- Execute the written statement and compare the results that you got with the desired results shown in the file 54 - Lab Exercise 1 - Task 4 Result.txt. 
 -- 
 -- What is the difference between the SYSDATETIME and CURRENT_TIMESTAMP functions?
---
+--CURRENT_TIMESTAMP has less precision (ms) than SYSDATETIME
 -- What is a language-neutral format for the DATE type?
+--YYYYMMDD
 ---------------------------------------------------------------------
 
 SET NOCOUNT ON;
@@ -106,7 +107,7 @@ SET NOCOUNT OFF;
 
 SELECT
 	isitdate
-	,TRY_CAST(isitdate AS DATE)
+	,TRY_CAST(isitdate AS DATE) AS converteddate
 FROM Sales.Somedates;
 
 
