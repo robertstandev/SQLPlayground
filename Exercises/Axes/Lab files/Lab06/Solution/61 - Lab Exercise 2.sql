@@ -19,8 +19,8 @@ SELECT
 	DISTINCT
 		O.custid
 FROM Sales.Orders AS O
-WHERE O.orderdate >= CAST('February 2008' AS DATE)
-	AND O.orderdate < CAST('MARCH 2008' AS DATE)
+WHERE O.orderdate >= 'February 2008'
+	AND O.orderdate < 'MARCH 2008'
 
 -------
 
@@ -28,16 +28,9 @@ SELECT
 	DISTINCT
 		O.custid
 FROM Sales.Orders AS O
-WHERE O.orderdate BETWEEN  CAST('February 2008' AS DATE)
-	AND CAST('MARCH 2008' AS DATE)
+WHERE O.orderdate BETWEEN 'February 2008'
+	AND 'MARCH 2008'
 
--------
-
-SELECT
-	DISTINCT
-		O.custid
-FROM Sales.Orders AS O
-WHERE FORMAT(O.orderdate, 'MMMM yyyy') = 'February 2008'
 
 ---------------------------------------------------------------------
 -- Task 2
@@ -77,6 +70,15 @@ WHERE orderdate BETWEEN DATEADD(DAY, -4, EOMONTH(orderdate))
 --
 -- Execute the written statement and compare the results that you got with the recommended result shown in the file 65 - Lab Exercise 2 - Task 4 Result.txt.
 ---------------------------------------------------------------------
+SELECT
+	DISTINCT
+		productid
+FROM Sales.Orders AS O
+	INNER JOIN Sales.OrderDetails AS OD ON OD.orderid = O.orderid
+WHERE orderdate BETWEEN DATEFROMPARTS(YEAR('2007'), 1, 1) 
+	AND DATEADD(DAY, -2, DATEADD(WEEK, 10, '2007'))
+
+--
 
 SELECT
 	DISTINCT
