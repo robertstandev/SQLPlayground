@@ -1,0 +1,4 @@
+- Variabile numite corect si complet fara prescurtari
+- Creare variabila dintr-o data care este folosita de cel putin 2x (ex: se foloseste intr-un insert sau where o bucata de data de 2x+ atunci se va crea o variabila pentru ea)
+- Incercat pe cat posibil sa se evite while-uri sau cursoare
+- Sa nu se foloseasca functii in filtrarea where (ex: WHERE CAST(InsertDate AS Date) = '2023-09-21' transformat in : WHERE InsertDate BETWEEN '2023-09-21 00:00:00' AND '2023-09-21 23:59:59'
