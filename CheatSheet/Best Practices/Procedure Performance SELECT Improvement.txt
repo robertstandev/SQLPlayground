@@ -1,0 +1,18 @@
+La inceputul procedurii ca sa nu mai bagi IF EXISTS SELECT de mai multe ori FROM aceeasi sursa , bagi doar valoarea aia la inceputul procedurii intr-o variabila si apoi cand vrei sa faci verificare verifici cu variabila respectiva if @...=@...
+
+
+ex:
+inloc de IF EXISTS(SELECT TOP 1 1 FROM tblordordersmaster where udf_int_1 = 1 and idOrder = @OrderID)
+
+si apoi inca un IF EXISTS(select top 1 1 from tblordordersmaster where udf_int_1 = 0 and idorder = @OrderID)
+
+
+scrii doar o data la inceput 
+DECLARE @UDF_INT_1 BIT
+
+SELECT TOP 1 @UDF_INT_1 = UDF_INT_1 FROM tblordordersmaster where idorder = @orderID
+
+
+De retinut !!!
+se foloseste aceasta metoda doar cand sunt cel putin 2x SELECT-uri in aceeasi procedura (care fac acelasi lucru)
+in tabela de mai sus tblordordersmaster , liniile sunt unice cand le filtrezi pe idOrder = @ORDERID (ca e tabela header comenzi , daca era tabela detalii comenzi (si aveai 2-3-4-5+ produse/linii la o singura comanda era inutila)
