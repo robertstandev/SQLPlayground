@@ -1,1 +1,24 @@
- 
+ SELECT 
+    r.session_id AS SPID,
+    r.blocking_session_id AS BlkBy,
+    r.total_elapsed_time AS ElapsedMilliseconds,
+    r.cpu_time AS CPU,
+    r.reads AS IOReads,
+    r.writes AS IOWrites,
+    r.command AS CommandType,
+    r.last_wait_type AS LastWaitType,
+    OBJECT_NAME(st.objectid, st.dbid) AS ObjectName,
+    SUBSTRING(st.text, (r.statement_start_offset/2)+1, 
+        ((CASE r.statement_end_offset
+          WHEN -1 THEN DATALENGTH(st.text)
+         ELSE r.statement_end_offset
+         END - r.statement_start_offset)/2) + 1) AS SQLStatement,
+    r.status AS Status,
+    s.login_name AS Login,
+    s.host_name AS Host,
+    DB_NAME(r.database_id) AS DbName,
+    r.start_time AS StartTime
+FROM sys.dm_exec_requests r
+JOIN sys.dm_exec_sessions s
+ON r.session_id = s.session_id
+CROSS APPLY sys.dm_exec_sql_text(r.sql_handle) st
