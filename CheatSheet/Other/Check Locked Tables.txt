@@ -1,0 +1,18 @@
+ SELECT 
+    DB_NAME(l.resource_database_id) AS DatabaseName,
+    OBJECT_NAME(p.object_id) AS TableName,
+    l.resource_type AS ResourceType,
+    l.request_mode AS LockType,
+    STUFF((
+        SELECT ', ' + CAST(l2.request_session_id AS VARCHAR)
+        FROM sys.dm_tran_locks AS l2
+        WHERE l.resource_associated_entity_id = l2.resource_associated_entity_id
+        FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, '') AS SessionIds,
+    COALESCE(OBJECT_NAME(t.objectid), '') AS BlockingObjectName,
+    t.text AS BlockingText
+FROM sys.dm_tran_locks AS l
+JOIN sys.partitions AS p ON p.hobt_id = l.resource_associated_entity_id
+LEFT JOIN sys.dm_exec_requests AS r ON l.request_session_id = r.session_id
+CROSS APPLY sys.dm_exec_sql_text(r.sql_handle) AS t
+WHERE l.resource_database_id = DB_ID()
+AND p.object_id > 0
