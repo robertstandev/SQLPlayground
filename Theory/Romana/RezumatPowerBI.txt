@@ -1,0 +1,71 @@
+
+MEASURE
+-computed at query time (stored only as source code)
+-coumputed at the filtered context of the visual
+-YOU CAN NOT SLICE AND DICE
+-always have aggregate like (SUM AVG etc)
+(pus la iconita a2a stanga in modul tabel de arata toate datele din tabel)
+Se calculeaza in contextul unui filtru
+Nu tin de tabel
+
+SUM,AVG
+
+---------------------------------------------------------
+
+CALCULATED COLUMNS
+-computed once and stored in the table (uses space)
+-computed at process time when there is no filltered context so they dont have access to the filtered context
+-used for SLICE AND DICE
+(pus la iconita a2a stanga in modul tabel de arata toate datele din tabel)
+
+
+Contextul in care se calculeaza o ....calculata (18:47) este la nivel de rand
+
+-iteratori SUMX,AVGX
+
+
+--------------------------------------------------------
+
+Format (pus virgula pe valori la coloane , semn de dolar etc)
+(pus la iconita a2a stanga in modul tabel de arata toate datele din tabel si dupa alegi acolo coloana care vrei sa o formatezi si dupa ce o selectezi apare sus optiuni de format)
+
+
+--------------------------------------------------------
+
+Interactiunea cu alte diagrame (sa nu afecteze anumite diagrame) dai pe diagrama apoi sus dreapta la Format si dupa stanga de tot ceva cu interactive sau filter
+
+
+-----------------------------------------------------
+
+In power bi sunt comprimate datele
+De ex daca gaseste mai multe cuvinte la fel poate sa le stocheze ca un cod ceva
+La fel daca gaseste combinatie de litere sau cifre si le stocheaza ca un cod cv
+
+SUM AVG (Sunt Agregatori)(La nivel de coloana) SUM(TotalDue)
+
+-----------------------------------------------------
+
+
+DAX = refac randurile comprimate mai sus
+SUMX AVGX etc(Sunt iteratori)   (La nivel de rand) SUMX(SalesOrderHeader,Subtotal,TaxAmt,Freight) (da Total Due)
+
+=====================================================
+
+IF
+ISNUMBER
+ISTEXT
+ISBLANK
+
+================================================
+
+Group by necesita un tabel nou (SUMARIZECOLUMNS)
+
+================================================
+
+Context
+
+Contextul este ceea ce face posibilă efectuarea unei analize
+Există diferite tipuri de context:
+row context
+query context
+filter context

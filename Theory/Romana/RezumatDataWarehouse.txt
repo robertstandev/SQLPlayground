@@ -1,0 +1,52 @@
+SQL TABEL JOIN:
+(NUME PRENUME) Person.Person -> Sales.SalesPerson
+                             -> Sales.SalesCustomer
+                ->Sales.SalesOrderHeader
+
+(Produse) Production.Product -> Sales.SalesOrderDetail <-> Sales.SalesOrderHeader
+
+(Comenzi)SalesOrderHeader
+(Teritoriu) Sales.SalesTerritory <-> SalesOrderHeader
+
+
+-------------------------------------------------------------------------------
+
+Data Warehouse
+DeNormalizeaza o baza de date
+
+MODEL DE DATE
+-sa reduca numarul de joinuri necesare
+-daca facem join sa evitam joinurile intre tabele imense (un tabel mare cu unul mic)
+-sa livram un model de date intuitiv(fiecare entitate de business sa aiba un singur tabel)
+-vreau sa inregistrez date istorice
+
+
+---------------------------------------------------------------------
+
+FACT TABLE
+-Datele care trebuie sa le analizam/agregam / cifrele vitale pentru businessul nostru (cat am vandut , cifra de afaceri etc)
+-Datele sunt aditive
+-In fact table se pun coloane care se pot face min,max,avg etc pe ele (de ex Quantity . Cv pe care nu ai putea face avg de ex ar fi LastName)
+-Fiecare fact table reprezinta un departament(HR,Production etc)
+-NU SE PREA FACE UPDATE
+
+-Slice/Dice Data (pus where-uri ex: in anul X clientul Y in teritoriul Z cat s-a vandut si te uiti sa vezi care e intersectia intre intre dimensiuni in FACT TABLE)
+
+
+---------------------------------------------------------------------
+
+Dimensions
+-Toate perspectivele din care putem privi Fact Tables sau filtrele pe care le putem pune (filtru dupa client , dupa locatie)
+
+
+Dimensions = filtre
+Fact Table = Qty,Discount etc
+
+
+
+=================================
+
+Relatia IN POWER BI arata in ce directie se propaga contextul de filtru (single si both)
+INTOTDEAUNA de la one la many (de la Dimension la FactTable) nu poate fi SINGLE de la many la one
+
+La both daca filtrezi dupa comanda iti aduce salespersonul care a facut comanda de ex (filmare 2:17:28 filmarea 2022-09-07_18-02-16)

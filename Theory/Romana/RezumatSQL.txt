@@ -1,0 +1,461 @@
+SQL TABEL JOIN:
+(NUME PRENUME) Person.Person -> Sales.SalesPerson -> SalesTerritory (daca vrei teritoriul)
+                             -> Sales.SalesCustomer
+                ->Sales.SalesOrderHeader
+
+(Produse) Production.Product -> Sales.SalesOrderDetail <-> Sales.SalesOrderHeader
+
+(Comenzi)SalesOrderHeader
+(Teritoriu) Sales.SalesTerritory <-> SalesOrderHeader
+
+======================================================================
+Procesul de normalizare ajuta la a scapa de tot ce e redundant.
+Proces de normalizare si are ca reguli:
+
+1)Forma Normala 1:
+-atomicitatea celulei (valoarea dintr-o celula nu trebuie sa fie divizibila) (ex Name(cu nume prenume trebuie impartit in 2 coloane diferite FN , MiddleName, LN)
+-sa NU existe mai multe coloane reprezentand aceleasi tipuri de date/fapte/obiecte (de 2 ori FN de ex)
+-sa nu existe pe mai multe randuri acelasi obiect
+
+=======================================================================
+
+RELATII INTRE TABELE
+Relațiile sunt asocierile stabilite între două sau mai multe tabele. Relațiile se bazează pe câmpuri comune
+
+-one to one
+-one to many
+-many to one
+
+One to One
+Pentru fiecare înregistrare din tabelul primar, există o singură înregistrare în tabelul străin
+
+One To Many
+Pentru fiecare înregistrare din tabelul primar, există una sau mai multe înregistrări înrudite în tabelul străin.
+
+Many to Many
+Pentru fiecare înregistrare din tabelul primar, există mai multe înregistrări înrudite în tabelul străin și pentru fiecare înregistrare din tabelul străin, există multe înregistrări înrudite în tabelul primar.
+
+
+
+2)Forma normala 2:
+Toate coloanele dintr-un tabel trebuie sa depinda de toate coloanele din cheia candidata (intreaga)
+
+-chei (sunt niste constrangeri intre tabele)
+    -Primary Key (o constrangere pusa pe o coloana sau mai multe si verifica ca toate valorile de pe coloana sa fie unice si sa nu existe valoarea null (Unique & Not Null)
+
+    -Foreign Key verifica ca toate valorile de pe coloana sa existe pe coloana in baza la care face referinta , NU are constrangere de Not Null SI EL E FOREIGN KEY DOAR DACA DEPINDE DE UN PRIMARY KEY IN ALT TABEL.
+    O CONSTRANGERE CARE:
+    (ASIGURA CA DATELE SUNT CORECTE SI NU SUNT ADAUGATE/STERSE DATE ERONATE/
+    PREVINE ANUMITE ACTIUNI CARE AR DISTRUGE RELATIA DINTRE 2 TABELE)
+
+    EX:
+    (Tabela)Comanda FOREIGN KEY (Coloana)(CasierID) REFERENCES (Tabela)Casier (Coloana)(CasierID)
+    (Tabela)Comanda FOREIGN KEY (Coloana)(CustomerAccountNumber) REFERENCES (Tabela)Client (Coloana)(CustomerAccountNumber)
+    Si sa zicem ca vrei sa inserezi o valoare care nu exista in tabela la care face referinta
+
+
+    -Cheie Compusa/Key Compounds (Primary Key din mai multe coloane)
+
+    -Key Candidate (au valori unice si not nule insa nu sunt Primary Key) ->
+
+
+
+3) Forma normala 3
+
+Orice coloana dintr-un tabel trebuie sa depinda direct de cheia primara
+
+
+(Daca te intreaba cum ar face daca ar fi sa depinda indirect)
+Ar fi:
+EX:
+SalesOrderID <- CustomerID <- CustomerAddress (depinde de customer dar nu de salesorderID)
+
+=======================================================================
+
+ASCII 8bit -> 1 byte
+Unicode 16 bit -> 2 bytes
+------------------------------------------------------------------------
+Data Types/Variabile:
+bigint
+int             (+- 2 miliarde)
+smallint        (+- 32k)
+tinyint         (0-255)
+decimal         (nr de cifre, nr de cifre dupa virgula ex) : 12.502 = decimal(5,3)
+datetime        (nu ar trebui folosit decat daca trebuie pt ca se aproximeaza)
+datetime2       (exact si tine cont si de ms)
+float           (nu e fix)
+
+char()          (daca are mai putin de cat il limitezi atunci va pune spariu ex: Cool = char(4) dar daca ar fi Cold = char(6) ar fi scris ca "Cold  "
+                -non unicode
+                -fix (foloseste aceeasi cantitate)
+                -1 byte pt data (8 biti = 1 byte)
+
+nchar()         -unicode
+                -fix
+                -2 byte pt data
+
+varchar()       (afiseaza doar cat are cuvantul si tine cont si de limita ex: Cool = vchar(6) o sa dea "Cool" si stocheaza acea data de cantitate/lungime (ex in exemplu de sus "6") la inceput in primii 2 bytes
+                -variabil (foloseste cat e necesar)
+                -non unicode
+                -1 byte pt data
+
+nvarchar()      (E unicode si e bun pentru cand ai diacritice sau litere/semne ciudate , la fel nvarchar(5)
+                -variabil (foloseste cat e necesar)
+                -unicode
+                -2 byte pt data
+
+
+========================================================================
+
+SQL Server uses the following PRECEDENCE order for data types:
+
+user-defined data types (highest)
+sql_variant
+xml
+datetimeoffset
+datetime2
+datetime
+smalldatetime
+date
+time
+float
+real
+decimal
+money
+smallmoney
+bigint
+int
+smallint
+tinyint
+bit
+ntext
+text
+image
+timestamp
+uniqueidentifier
+nvarchar (including nvarchar(max) )
+nchar
+varchar (including varchar(max) )
+char
+varbinary (including varbinary(max) )
+binary (lowest)
+
+
+========================================================================
+CONSTRANGERI:
+--------------
+unique      -poate sa aibe null o singura data iar datele trebuie sa fie unice
+
+not null
+
+primary key (not null si unique si toate coloanele trebuie sa depinda de el - poate fi simplu sau compus din mai multe coloane)
+
+foreign key -verifica ca toate valorile de pe coloana sa existe pe coloana in baza la care face referinta , ASIGURA CA DATELE SUNT CORECTE SI NU SUNT ADAUGATE/STERSE DATE ERONATE , PREVINE ANUMITE ACTIUNI CARE AR DISTRUGE LINCUL/LEGATURA DINTRE 2 TABELE
+    EX:
+    (Tabela)Comanda FOREIGN KEY (Coloana)(CasierID) REFERENCES (Tabela)Casier (Coloana)(CasierID)
+    (Tabela)Comanda FOREIGN KEY (Coloana)(CustomerAccountNumber) REFERENCES (Tabela)Client (Coloana)(CustomerAccountNumber)
+    Si sa zicem ca vrei sa inserezi o valoare care nu exista in tabela la care face referinta
+
+default     (sa pui ceva sa fie default cand nu o mai setezi tu dupa)
+
+check       (mai mic sau mai mare de o valoare, sa apartina sau nu unei multimi de valori)
+
+=======================================================================
+
+IDENTITY - se adauga valori secventiale (dar se poate dubla daca activezi functia aceea cu SET ON)
+
+
+=======================================================================
+
+DDL (data description/definition language)  (Metadata)
+-create (creez tabel)
+-drop   (sterg tabel)
+-alter  (modifica tabelul nu data)
+
+DML (data manipulation language)            (Data)
+-insert (creez o linie noua in tabel)
+-delete (sterg o linie sau mai multe linii din tabel)
+-update (modific o linie sau mai multe linii din tabel)
+-select (citesc linii dintr-un tabel)
+
+baza de date = informatiile
+server = gestioneaza baze de date (fisier de date si fisier de log (noteaza tranzactiile))
+
+
+=======================================================================
+
+ETL = extract transform load (SSIS , Power Query)
+(Microsoft Transformare Date) SSIS = SQL Server Integration Services
+
+
+=======================================================================
+
+Rulat query cum ruleaza:
+1)Syntax check
+2)Verifica numarul de valori din insert
+3)Rulare
+
+Un SERVER furnizeaza servicii catre clienti si poate gestiona mai multi clienti
+Poate fi offline sau online.
+O aplicatie care raspunde cererilor unor clienti il face un server
+
+Aplicatie Client (Management Studio)
+
+Requests -> Client
+Respone <-  Server
+
+"GO" trimite scriptul catre SQL asteapta raspunsul dupa care continua ce e in query (ca si cum imparte scriptul in mai multe bucati - batchuri)
+GO e recunoscut doar de aplicatia client
+
+
+=====================================================
+
+SSIS
+Diferente Merge, Merge Join , Union All , Lookup:
+
+Merge
+-scrie datele (coloanele) unele sub altele (ca randuri)
+-datele trebuiesc sortate
+-doar doua surse
+-nu suporta error handling
+
+Merge Join
+-scrie datele unele langa altele
+-depinde cu ce se face matching (inner,outer)
+-datele trebuiesc sortate
+-doar doua surse
+-nu suporta error handling
+
+
+Union All
+-datele NU trebuiesc sortate
+-surse foarte multe
+-nu suporta error handling
+
+Lookup
+-se face cand este o relatie de unu la unu sau many to one
+-nu necesita sort
+-o singura sursa
+-suporta error handling poate imparti rezultatele in 2 (ceea ce respecta acel lookup si ce nu respecta)
+
+Data Conversion
+-face data conversion
+-nu suporta expresii precum derived column
+
+Derived column
+-suporta expresii
+
+
+=====================================================
+
+NoSql - nu exista data type , permisiv
+
+SQL - constrangeri pierderi performanta
+
+=====================================================
+
+Select = filtreaza coloanele
+Where = filtreaza valorile/randurile in functie de clauze
+From = selecteaza tabelul
+
+
+=====================================================
+
+WHERE Nu Poti pune functii aggregate (SUM,COUNT,MAX,AVG,MIN) , si filtreaza randurile
+
+HAVING suporta functii aggregate , si filtreaza group by-ul
+
+=====================================================
+
+JOIN
+
+Alatura randurile A 2 tabele in functie de conditia pe care o dam noi prin ON
+
+
+=========================================================
+
+VIEW
+
+Se stocheaza SELECTUL , e ca o fereastra care vezi doar ce e in fata si nimic altceva dar care afecteaza tabelele la care se fac view
+
+Pentru a vedea datele trebuie sa avem un USER care se poate conecta la server si dupa alt user care se poate conecta la bazele de date insa ambii useri pot reprezenta aceeasi entitate
+Conectiunea se face prin chei separate (1 pt sql sever , 1 pt ce baza de date iti trebuie)
+Nu poti sa te conectezi la o baza de date fara sa fii conectat la server
+
+
+=======================================================
+
+Un LOGIN trebuie sa aibe un USER , Loginul mapeaza userul , loginul poate fi de tip windows auth sau sql auth
+
+
+=====================================================
+
+INDEX - CLUSTERED INDEX vs NON CLUSTERED INDEX
+
+Nodul Principal (Cuprins) -> Noduri Intermediare -> Nod Frunza/Pagina Date
+
+Daca table-ul nu are nici un index atunci asta se numeste HEAP.
+
+Index SEEK = Vede in ce pagini trebuie sa citeasca si se duce direct acolo
+(Table)SCAN = cauta toate randurile pana la capat si se uita dupa valoarea care o cauti
+
+INDEX
+Indexul reprezinta un cuprins.O pagina de index are 8 KB. Daca e nevoie de mai mult se creeaza alte pagini de index si paginile acestea devin pagini intermediare care sunt vazute de o pagina de indexi principala (nod principal)
+De fiecare dată când se face o scriere în baza de date, indecșii sunt inutilizabili până când nu sunt actualizați. Dacă baza de date primește în mod constant scrieri, atunci indecșii nu vor fi niciodată utilizabili.
+
+
+Clustered Index - definește ordinea în care datele sunt stocate fizic într-un tabel
+By Default se face automat clustered index pe Primary Key
+
+
+Non Clustered Index
+Retin pointeri/adrese inapoi catre tabel si trebuie sa fie unic randul
+Automat contine si coloana de clustered index + pe ce coloana/e facem noi non clustered
+Ar trebui folosit pe coloanele pe care sunt facute where-uri sau join-urile (ce se cauta mai des)
+
+
+⇒ Poate exista doar un singur Clusterd Index (stocheaza fizic randurile in ordine) in timp ce NonClustered pot exista mai multi
+⇒ Clustered Indexul iti permite sa stochezi pagini de date in nodurile frunza in timp ce NonClustered Index stocheaza in frunze coloana dupa care faci nonClusteredIndexul , coloana de clustered index(daca exista) + ce coloane mai incluzi daca incluzi
+⇒ Clustered Index este mai rapid. Atunci când o interogare este emisă împotriva unei coloane pe care este creat indexul, baza de date va merge mai întâi la index și va căuta adresa rândului corespunzător din tabel. Apoi va merge la adresa de rând și va prelua alte valori ale coloanei. Datorită acestui pas suplimentar, indecșii non-cluster sunt mai lenți decât clustered index.
+
+
+Tabela cu PrimaryKey pe ID
+============================================
+||  ID    |   FirstName   |   LastName    ||
+||  1     |    Dragos     |     Negrila   ||
+||  2     |    Robert     |     Stan      ||
+||  3     |    Andrei     |     Neagu     ||
+||........................................||
+|| 1262   |    Cristi     |     Baluta    ||
+============================================
+
+
+                                        Clustered Index(CI)
+                            (CI = ID (deoarece e Primary Key mai sus)
+                                      (Cuprins/Nod Principal)
+                                    ==========================
+                                    ||   ID     |   Pagina  ||
+                                    ||  1-800   |     1     ||
+                                    || 801-1600 |     2     ||
+                                    ==========================
+                                    /                       \
+                                   /                         \
+                                  /                           \
+                Pagina 1         /                             \    Pagina 2
+============================================        ============================================
+||   ID   |   FirstName   |   LastName    ||        ||   ID   |   FirstName   |   LastName    ||
+||   1    |    Dragos     |     Negrila   ||        ||   801  |    ......     |     .......   ||
+||   2    |    Robert     |     Stan      ||        ||........|...............|...............||
+||   3    |    Andrei     |     Neagu     ||        ||  1262  |    Cristi     |     Baluta    ||
+||........|...............|...............||        ||........|...............|...............||
+||  800   |     ......    |     .......   ||        ||  1600  |    ......     |     .......   ||
+============================================        ============================================
+
+
+
+
+                            NonClustered Index(NCI)
+                    (NCI = FirstName (selectat in create NCI)
+                            (Cuprins/Nod Principal)
+                        ===============================
+                        ||   FirstName   |   Pagina  ||
+                        ||Andrei...Dragos|     1     ||
+                        ||E.............Z|     2     ||
+                        ===============================
+                            /                     \
+                           /                       \
+                          /                         \
+      Pagina 1           /                           \  Pagina 2
+============================            ============================
+||   FirstName   |   ID   ||            ||   FirstName   |   ID   ||
+||    Andrei     |   3    ||            ||...............|........||
+||    Cristi     |  1262  ||            ||    Robert     |   2    ||
+||    Dragos     |   1    ||            ||...............|........||
+||...............|........||            ||...............|........||
+============================            ============================
+Coloana ID e bagata automat ca e Clustered Index
+
+Datele sunt stocate la nivel de rand.
+Deobicei se face pe dim(dimension)
+
+
+=====================================================
+
+Clustered COLUMNSTORE INDEX
+Randurile sunt puse pe orizontala
+
+Datele stocate la nivel de coloana sunt bune mai ales pt agregate.
+Deobicei se face pe fact table. (ca pe fact table se fac agregate)
+
+Exemplul de mai sus de la clustered index si nonclustered
+
+                                        ==========================
+                                        ||   Rows   |   Pagina  ||
+                                        ||  1-800   |   1,2,3   ||
+                                        || 801-1600 |   4,5,6   ||
+                                        ==========================
+                                   /                |            \
+                                /                   |             \
+                             /                      |              \
+                Pagina 1  /              Pagina 2   |               \    Pagina 3
+=========================  ================================  ==============================
+|| 1 | 2 | 3 |...| 800 ||  ||Dragos|Robert|Andrei|...|...||  ||Negrila|Stan|Neagu|...|...||
+=========================  ================================  ==============================
+
+=====================================================
+
+TRIGGER
+
+Este o procedură stocată în baza de date care invocă automat ori de câte ori are loc un eveniment special în baza de date. De exemplu, un declanșator poate fi invocat atunci când datele sunt inserate,updatate,sterse
+Nu poate primi input ca parametru
+Nu poate returna valori
+Nu suporta tranzactii (commit,rollback)
+
+
+=====================================================
+
+STORED PROCEDURE VS FUNCTION
+
+⇒ O procedură stocată în SQL Server poate avea parametri de intrare și de ieșire. O funcție, pe de altă parte, poate avea doar parametri de intrare.
+⇒ O funcție poate returna o singură valoare, în timp ce o procedură stocată poate returna numeroși parametri.
+⇒ In proceduri stocate poti face update,delete,insert in timp ce in functii nu.
+⇒ O funcție din SQL Server trebuie să returneze o valoare. Cu toate acestea, este opțional într-o procedură stocată.
+⇒ Putem folosi o funcție într-o procedură stocată, dar nu putem folosi o procedură într-o funcție
+
+
+=====================================================
+
+Functie
+
+A)Scalar
+Returneaza o valoare
+
+B)Tabled Valued
+Returneaza un set de date sub forma unui tabel
+
+
+=====================================================
+
+TEMPORARY TABLES vs TABLES VARIABLES
+
+Tabela temporara (#TableName = temporara doar in queryul actual  | ##TableName = temporara in toata sesiunea (inclusiv alte queryuri))
+
+⇒ Variabila tabel (@table) este creată în memorie. În timp ce, un tabel temporar (#temp) este creat în baza de date tempdb. Cu toate acestea, dacă există o presiune de memorie, paginile care aparțin unei variabile de tabel pot fi împinse în tempdb.
+⇒ Variabilele de tabel nu pot fi implicate în tranzacții, logate sau blocate. Acest lucru face ca variabila tabelă sa fie mai rapidă decât tabelul temporar.
+⇒ In tabelele temporare sunt permise CREATE INDEX-uri, în timp ce in variabilele de tabel nu sunt permise CREATE INDEX, ci pot avea index folosind cheia primară sau constrângerea unică.
+⇒ Variabila tabel poate fi transmisă ca parametru la funcții și proceduri stocate, în timp ce același lucru nu se poate face cu tabelele temporare.
+⇒ Tabelele temporare sunt vizibile în rutina creată și, de asemenea, în rutinele copil. În timp ce, variabilele Tabelului sunt vizibile numai în rutina creată.
+
+
+=====================================================
+
+TRANSACTION:
+
+Asigura consistenta datelor prin blocarea datelor
+
+Tranzactia controleaza prin:
+Commit - salveaza modificarile efectuate
+Rollback - face rollback/da inapoi la modificarilor efectuate (poate cauza probleme cu identity)
+
+
+=====================================================

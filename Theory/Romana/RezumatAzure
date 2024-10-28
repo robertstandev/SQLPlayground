@@ -1,0 +1,71 @@
+On premise = la sediul firmei
+
+
+Data Factory in Data Warehouse
+Data Warehouse in Azure Synapse
+
+==================================================
+Azure
+portal.azure.com
+
+DTU = database transactional units (o reprezentare aproximativa la cpu, ram etc)
+
+
+Management Studio = o aplicatie/ un client care se poate conecta la alte servere
+
+
+
+SSMS(query) ->(parseaza queryul) Sql Server ->(trimite comanda daca e ok queryul) SSMS -> SQL Server SQL Server Cauta Obiectele sa vada daca exista -> SQL Server Verifica permisiunile -> SQL Server Plan de executie (cum sa ruleze acele joinuri si ce e in batch in functie de cum e mai performant) -> OS aduce datele in RAM de pe HDD
+
+
+
+====================================================
+
+Data Synapse Analytics
+
+
+Aplicatia noastra -> Hub / Control Node (Gestioneaza requestul) -> Noduri SQL (Compute Node)(Sql Server Separat) -> Azure Storage
+
+Control Nodeul imparte problema in probleme mai mici.
+Si trimite requesturi separate catre compute nodes(SQL node)
+Apoi
+Dupa ce un compute node termina treaba , trimite inapoi catre control node.
+Control nodeul asteapta ca toate compute nodurile sa termine treaba , sincronizeaza si le trimite inapoi la aplicatie
+
+
+
+Distributii
+
+-Hash (am o regula si spun ce date se duc pe ce compute node)
+
+-Round Robin (luam la rand cate un node si vedem unde este cel mai gol chiar daca datele sunt amestecate)  inserturile se fac mult mai repede dar dezavantaje la update si delete (where)
+
+-Replicate (copiaza data pe toate compute nodes) - nu e buna pt multe date (peste 10 mil randuri) (pus pe dimuri si pe tabele mici)
+
+
+=======================================
+
+Data lake
+
+Alt mod de a stoca datele
+Este scalabil
+Contine cantitati mari de date
+Poti stoca date mai putin importante gen esti facebook si pui muzica , imaginile , fisiere log
+
+
+Data Warehouse (DW - Cu Reguli) vs Data Lake (DL - Doar varsam datele fara reguli)
+Data
+DW - Date Procesate. Relationale de la sisteme tranzacționale, baze de date operaționale
+DL - Orice date mai ales brute (ne procesate) . Non-relationale si relationale din dispozitive IoT , social media, web siteruri , aplicatii mobile
+
+Data Processing
+DW - foloseste ETL (Extract Transform Load)
+DL - foloseste ELT (Extract Load Transform)
+
+
+============================================
+
+SQL - Synapse - Data Lake (viteza de ingestie pt ca nu sunt verificate datele)
+
+============================================
+
