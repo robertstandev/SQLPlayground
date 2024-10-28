@@ -1,0 +1,168 @@
+Library Management System
+Tables:
+Books table:
+
+BookID (int, Primary Key)
+
+Title (varchar(100), not null)
+
+AuthorName (varchar(100))
+
+PublishedYear (int)
+
+Genre (varchar(50))
+
+Members table:
+
+MemberID (int, Primary Key)
+
+FirstName (varchar(60), not null)
+
+LastName (varchar(60), not null)
+
+Email (varchar(120), unique, not null)
+
+JoinDate (date)
+
+Loans table:
+
+LoanID (int, Primary Key)
+
+MemberID (int, Foreign Key references Members(MemberID))
+
+BookID (int, Foreign Key references Books(BookID))
+
+LoanDate (date, default to current date)
+
+Functions:
+GetAvailableBooks:
+
+Returns books a member has not currently borrowed.
+
+CalculateFine:
+
+Calculates the fine based on the number of overdue days.
+
+GetMemberFullName:
+
+Concatenates first name and last name to return the full name of a member.
+
+GetBooksByAuthor:
+
+Returns books written by a specific author.
+
+GetBorrowedBooks:
+
+Returns books a member has borrowed.
+
+Procedures (use transactions):
+RetrieveOverdueBooks:
+
+Retrieves books that are overdue.
+
+AddNewBook:
+
+Adds a new book into the Books table.
+
+UpdateMemberInfo:
+
+Updates the information of an existing member.
+
+Views:
+AllLoansView:
+
+Shows all loans along with member details.
+
+AvailableBooksView:
+
+Shows all available books along with their genres.
+
+Triggers:
+UpdateLoanTableTrigger:
+
+Automatically updates the Loans table when a new record is added to the Books table.
+
+LogMemberUpdatesTrigger:
+
+Logs changes when a member's information is updated in the Members table.
+
+ALTER Tasks:
+Modify Books table:
+
+Add a new column for ISBN (varchar(13)).
+
+Alter CalculateFine function:
+
+Add new logic for holiday periods.
+
+Alter constraints:
+
+Change the Email column in Members to be nullable.
+
+DELETE Tasks:
+Delete constraints:
+
+Remove the unique constraint on the Email column in Members.
+
+**Delete every table, function, procedure, trigger, etc., one by one to practice deletion in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows:
+
+Add the following rows into the Members table:
+
+(1, 'John', 'Doe', 'john.doe@example.com', '2022-01-15')
+
+(2, 'Jane', 'Smith', 'jane.smith@example.com', '2021-03-22')
+
+(3, 'Michael', 'Brown', NULL, '2020-07-01')
+
+(4, 'Emily', 'Jones', 'emily.jones@example.com', NULL)
+
+(5, 'Sarah', 'Taylor', 'sarah.taylor@example.com', '2023-05-09')
+
+(6, 'David', 'Clark', 'david.clark@example.com', '2021-09-21')
+
+Add the following rows into the Books table:
+
+(1, 'To Kill a Mockingbird', 'Harper Lee', 1960, 'Fiction')
+
+(2, '1984', 'George Orwell', 1949, 'Dystopian')
+
+(3, 'Moby Dick', 'Herman Melville', 1851, 'Adventure')
+
+(4, 'The Great Gatsby', 'F. Scott Fitzgerald', 1925, 'Classic')
+
+(5, 'War and Peace', 'Leo Tolstoy', 1869, 'Historical')
+
+(6, 'Pride and Prejudice', 'Jane Austen', 1813, 'Romance')
+
+Add the following rows into the Loans table:
+
+(1, 1, 1, '2024-10-01')
+
+(2, 2, 2, '2024-10-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-10-04')
+
+(5, 5, 5, '2024-10-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the member with MemberID 3 in the Members table to 'michael.brown@example.com'.
+
+Update the genre of the book with BookID 4 in the Books table to 'Modern Classic'.
+
+Update the loan date of the loan with LoanID 3 in the Loans table to '2024-10-03'.
+
+Delete rows:
+
+Delete the member with MemberID 6 from the Members table.
+
+Delete the book with BookID 6 from the Books table.
+
+Delete the loan with LoanID 6 from the Loans table.

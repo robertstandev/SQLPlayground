@@ -1,0 +1,135 @@
+Tables:
+TeamMembers table:
+
+TeamMemberID (int, Primary Key)
+
+FirstName (varchar(60), not null)
+
+LastName (varchar(60), not null)
+
+ContactEmail (varchar(120), unique, not null)
+
+DateOfBirth (date)
+
+Items table:
+
+ItemID (int, Primary Key)
+
+ItemName (varchar(100), not null)
+
+ManagerName (varchar(100))
+
+ScheduleInfo (varchar(50))
+
+ProductionLog table:
+
+LogID (int, Primary Key)
+
+TeamMemberID (int, Foreign Key references TeamMembers(TeamMemberID))
+
+ItemID (int, Foreign Key references Items(ItemID))
+
+LogDate (date, default to current date)
+
+Functions:
+FetchAvailableItems: Returns items a team member is not currently assigned to.
+
+ComputeProductionRate: Calculates the production rate based on the number of units produced.
+
+GetFullName: Concatenates first name and last name to return the full name of a team member.
+
+FetchItemsByManager: Returns items managed by a specific manager.
+
+FetchAssignedItems: Returns items a team member is assigned to.
+
+Use CASE: Incorporate a CASE statement in one of the functions, e.g., in ComputeProductionRate, use CASE to check the production percentage and apply different grading levels.
+
+Data Type Conversion: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in ComputeProductionRate.
+
+Procedures (use transactions):
+ListAbsentTeamMembers: Retrieves team members who have missed their shifts.
+
+InsertNewItem: Adds a new item into the Items table.
+
+ModifyTeamMemberInfo: Updates the information of an existing team member.
+
+Views:
+Create a view to show all production logs along with team member details.
+
+Create another view to show all available items along with their managers.
+
+Triggers:
+Create a trigger to automatically update the ProductionLog table when a new record is added to the Items table.
+
+Create another trigger to log changes when a team member’s information is updated in the TeamMembers table.
+
+ALTER Tasks:
+Modify the Items table to add a new column for RoomNumber.
+
+Alter the ComputeProductionRate function to add new logic for holiday periods.
+
+Alter constraints: e.g., change the ContactEmail column in TeamMembers to be nullable.
+
+DELETE Tasks:
+Delete constraints: e.g., remove the unique constraint on the ContactEmail column in TeamMembers.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows: Add the following rows into the TeamMembers table:
+
+(1, 'John', 'Doe', 'john.doe@example.com', '1985-05-15')
+
+(2, 'Jane', 'Smith', 'jane.smith@example.com', '1990-08-22')
+
+(3, 'Michael', 'Brown', NULL, '1980-12-01')
+
+(4, 'Emily', 'Jones', 'emily.jones@example.com', NULL)
+
+(5, 'Sarah', 'Taylor', 'sarah.taylor@example.com', '1995-11-09')
+
+(6, 'David', 'Clark', 'david.clark@example.com', '1985-07-21')
+
+Add the following rows into the Items table:
+
+(1, 'Dining Table', 'Mr. Wilson', 'Mon/Wed/Fri 10:00-11:00')
+
+(2, 'Office Desk', 'Ms. Adams', 'Tue/Thu 12:00-13:30')
+
+(3, 'Plastic Chair', NULL, 'Mon/Wed 14:00-15:30')
+
+(4, 'Glass Cabinet', 'Dr. Brown', NULL)
+
+(5, 'Wooden Cupboard', 'Dr. Green', 'Tue/Thu 10:00-11:30')
+
+(6, 'Metal Shelf', 'Mr. White', 'Mon/Wed/Fri 12:00-13:00')
+
+Add the following rows into the ProductionLog table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the team member with TeamMemberID 3 in the TeamMembers table to 'michael.brown@example.com'.
+
+Update the schedule of the item with ItemID 4 in the Items table to 'Mon/Wed 10:00-11:30'.
+
+Update the log date of the production log with LogID 3 in the ProductionLog table to '2024-09-03'.
+
+Delete rows:
+
+Delete the team member with TeamMemberID 6 from the TeamMembers table.
+
+Delete the item with ItemID 6 from the Items table.
+
+Delete the production log with LogID 6 from the ProductionLog table.

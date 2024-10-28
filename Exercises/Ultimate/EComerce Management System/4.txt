@@ -1,0 +1,137 @@
+Tables
+Users table:
+
+ShopperID (int, Primary Key)
+
+GivenName (varchar(80), not null)
+
+Surname (varchar(80), not null)
+
+UserEmail (varchar(140), unique, not null)
+
+BirthDate (date)
+
+Stock table:
+
+ProductID (int, Primary Key)
+
+ProductTitle (varchar(130), not null)
+
+ManufacturerName (varchar(130))
+
+ProductInfo (varchar(80))
+
+Sales table:
+
+SaleID (int, Primary Key)
+
+ShopperID (int, Foreign Key references Users(ShopperID))
+
+ProductID (int, Foreign Key references Stock(ProductID))
+
+SaleDate (date, default to current date)
+
+Functions
+RetrieveAvailableProducts: Returns products a user hasn't purchased.
+
+DetermineDiscountRate: Calculates discount based on the purchase volume.
+
+GetUserFullName: Concatenates given name and surname to return the full name of a user.
+
+RetrieveProductsByManufacturer: Returns products supplied by a specific manufacturer.
+
+RetrievePurchasedProducts: Returns products a user has purchased.
+
+Use CASE: Incorporate a CASE statement in one of the functions, e.g., in DetermineDiscountRate, use CASE to apply different discount levels based on volume purchased.
+
+Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in DetermineDiscountRate.
+
+Procedures (use transactions)
+FindInactiveUsers: Retrieves users who haven't made any purchases recently.
+
+InsertNewProduct: Adds a new product into the Stock table.
+
+UpdateUserDetails: Updates details of an existing user.
+
+Views
+Create a view to show all sales along with user details.
+
+Create another view to show all available products along with their manufacturers.
+
+Triggers
+Create a trigger to automatically update the Sales table when a new record is added to the Stock table.
+
+Create another trigger to log changes when a user’s information is updated in the Users table.
+
+ALTER Tasks
+Modify the Stock table to add a new column for QuantityInStock.
+
+Alter the DetermineDiscountRate function to add new logic for promotional periods.
+
+Alter constraints: e.g., change the UserEmail column in Users to be nullable.
+
+DELETE Tasks
+Delete constraints: e.g., remove the unique constraint on the UserEmail column in Users.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks
+Insert rows:
+
+Add the following rows into the Users table:
+
+(1, 'Chris', 'Brown', 'chris.brown@example.com', '1985-03-15')
+
+(2, 'Pat', 'Taylor', 'pat.taylor@example.com', '1990-07-22')
+
+(3, 'Jordan', 'Green', NULL, '1980-11-01')
+
+(4, 'Morgan', 'Clark', 'morgan.clark@example.com', NULL)
+
+(5, 'Sydney', 'Ramirez', 'sydney.ramirez@example.com', '1995-10-09')
+
+(6, 'Sam', 'Lee', 'sam.lee@example.com', '1987-06-21')
+
+Add the following rows into the Stock table:
+
+(1, 'Gaming Desktop', 'GamingWorld', '32GB RAM, 2TB SSD')
+
+(2, 'Fitness Tracker', 'FitTech', '64GB Storage')
+
+(3, 'Convertible Laptop', NULL, '256GB Storage')
+
+(4, 'Wireless Earphones', 'SoundBlaster', NULL)
+
+(5, 'VR Headset', 'VirtualReality', '128GB Storage')
+
+(6, 'Action Camera', 'AdventurePro', '32MP, 5K Video')
+
+Add the following rows into the Sales table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the user with ShopperID 3 in the Users table to 'jordan.green@example.com'.
+
+Update the description of the product with ProductID 4 in the Stock table to 'True Wireless, Noise Cancelling'.
+
+Update the sale date of the sale with SaleID 3 in the Sales table to '2024-09-03'.
+
+Delete rows:
+
+Delete the user with ShopperID 6 from the Users table.
+
+Delete the product with ProductID 6 from the Stock table.
+
+Delete the sale with SaleID 6 from the Sales table.

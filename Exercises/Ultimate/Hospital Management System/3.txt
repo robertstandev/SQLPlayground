@@ -1,0 +1,145 @@
+Tables:
+
+    PatientRecords table:
+
+        PatientID (int, Primary Key)
+
+        FirstName (varchar(60), not null)
+
+        LastName (varchar(60), not null)
+
+        Email (varchar(120), unique, not null)
+
+        Birthdate (date)
+
+    ClinicDepartments table:
+
+        DeptID (int, Primary Key)
+
+        DeptName (varchar(100), not null)
+
+        Head (varchar(100))
+
+        Timings (varchar(50))
+
+    PatientVisits table:
+
+        VisitID (int, Primary Key)
+
+        PatientID (int, Foreign Key references PatientRecords(PatientID))
+
+        DeptID (int, Foreign Key references ClinicDepartments(DeptID))
+
+        VisitDate (date, default to current date)
+
+Functions:
+
+    ListAvailableDepartments: Returns departments a patient doesn't have a visit with.
+
+    AssessRecoveryRate: Calculates the recovery rate based on the number of follow-up visits attended.
+
+    CombinePatientName: Concatenates first name and last name to return the full name of a patient.
+
+    ListDepartmentsByHead: Returns departments managed by a specific head.
+
+    ListPatientVisits: Returns visits a patient has registered for.
+
+    Use CASE: Incorporate a CASE statement in one of the functions, e.g., in AssessRecoveryRate, use CASE to check the recovery percentage and apply different stages.
+
+    Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in AssessRecoveryRate.
+
+Procedures (use transactions):
+
+    FetchMissingPatients: Retrieves patients who have missed follow-up visits.
+
+    InsertNewDepartment: Adds a new department into the ClinicDepartments table.
+
+    ChangePatientInfo: Updates the information of an existing patient.
+
+Views:
+
+    Create a view to show all visits along with patient details.
+
+    Create another view to show all available departments along with their heads.
+
+Triggers:
+
+    Create a trigger to automatically update the PatientVisits table when a new record is added to the ClinicDepartments table.
+
+    Create another trigger to log changes when a patient’s information is updated in the PatientRecords table.
+
+ALTER Tasks:
+
+    Modify the ClinicDepartments table to add a new column for RoomNumber.
+
+    Alter the AssessRecoveryRate function to add new logic for holiday periods.
+
+    Alter constraints: e.g., change the Email column in PatientRecords to be nullable.
+
+DELETE Tasks:
+
+    Delete constraints: e.g., remove the unique constraint on the Email column in PatientRecords.
+
+    Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+    Insert rows:
+
+        Add the following rows into the PatientRecords table:
+
+            (1, 'Alex', 'Johnson', 'alex.johnson@hospital.com', '1987-05-23')
+
+            (2, 'Emma', 'Williams', 'emma.williams@hospital.com', '1992-08-14')
+
+            (3, 'Mason', 'Taylor', NULL, '1980-10-04')
+
+            (4, 'Ava', 'Clark', 'ava.clark@hospital.com', NULL)
+
+            (5, 'Mia', 'Martinez', 'mia.martinez@hospital.com', '1995-02-11')
+
+            (6, 'Noah', 'Harris', 'noah.harris@hospital.com', '1984-06-07')
+
+        Add the following rows into the ClinicDepartments table:
+
+            (1, 'Radiology', 'Dr. Allen', 'Mon/Wed/Fri 08:00-10:00')
+
+            (2, 'Gastroenterology', 'Dr. Scott', 'Tue/Thu 11:00-13:00')
+
+            (3, 'Urology', NULL, 'Mon/Wed 14:00-16:00')
+
+            (4, 'Gynaecology', 'Dr. Baker', NULL)
+
+            (5, 'Hematology', 'Dr. Carter', 'Tue/Thu 09:00-11:00')
+
+            (6, 'Nephrology', 'Dr. Turner', 'Mon/Wed/Fri 12:00-14:00')
+
+        Add the following rows into the PatientVisits table:
+
+            (1, 1, 1, '2024-10-05')
+
+            (2, 2, 2, '2024-10-06')
+
+            (3, 3, 3, NULL)
+
+            (4, 4, 4, '2024-10-08')
+
+            (5, 5, 5, '2024-10-09')
+
+            (6, 6, 6, NULL)
+
+    Update rows:
+
+        Update the email of the patient with PatientID 3 in the PatientRecords table to 'mason.taylor@hospital.com'.
+
+        Update the timings of the department with DeptID 4 in the ClinicDepartments table to 'Mon/Wed 10:00-11:30'.
+
+        Update the visit date of the visit with VisitID 3 in the PatientVisits table to '2024-10-07'.
+
+    Delete rows:
+
+        Delete the patient with PatientID 6 from the PatientRecords table.
+
+        Delete the department with DeptID 6 from the ClinicDepartments table.
+
+        Delete the visit with VisitID 6 from the PatientVisits table.

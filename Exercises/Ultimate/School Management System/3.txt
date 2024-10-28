@@ -1,0 +1,143 @@
+Learners table:
+
+    TraineeID (int, Primary Key)
+
+    Forename (varchar(55), not null)
+
+    Surname (varchar(55), not null)
+
+    EmailAddress (varchar(115), unique, not null)
+
+    BirthDate (date)
+
+Subjects table:
+
+    SubjectID (int, Primary Key)
+
+    SubjectTitle (varchar(95), not null)
+
+    EducatorName (varchar(95))
+
+    ClassSchedule (varchar(45))
+
+Enrollments table:
+
+    EnrollmentID (int, Primary Key)
+
+    TraineeID (int, Foreign Key references Learners(TraineeID))
+
+    SubjectID (int, Foreign Key references Subjects(SubjectID))
+
+    EnrollmentDate (date, default to current date)
+
+Functions:
+
+    ListOpenSubjects: Returns subjects a learner is not currently enrolled in.
+
+    AssessAttendanceRate: Calculates the attendance rate based on attended sessions.
+
+    GetFullLearnerName: Concatenates forename and surname to return the full name of a learner.
+
+    FindSubjectsByEducator: Returns subjects taught by a specific educator.
+
+    ListEnrolledSubjects: Returns subjects a learner is enrolled in.
+
+    Apply CASE: Use a CASE statement in one of the functions, e.g., in AssessAttendanceRate, use CASE to verify attendance percentage and apply different grading scales.
+
+    DataTypeConversion: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in AssessAttendanceRate.
+
+Procedures (use transactions):
+
+    ListAbsentLearners: Retrieves learners who have missed sessions.
+
+    InsertNewSubject: Adds a new subject into the Subjects table.
+
+    ModifyLearnerDetails: Updates the information of an existing learner.
+
+Views:
+
+    Create a view to display all enrollments along with learner details.
+
+    Create another view to show all open subjects along with their educators.
+
+Triggers:
+
+    Create a trigger to automatically update the Enrollments table when a new record is added to the Subjects table.
+
+    Create another trigger to log changes when a learner's information is updated in the Learners table.
+
+ALTER Tasks:
+
+    Modify the Subjects table to add a new column for RoomID.
+
+    Alter the AssessAttendanceRate function to add new logic for holiday periods.
+
+    Alter constraints: e.g., change the EmailAddress column in Learners to be nullable.
+
+DELETE Tasks:
+
+    Delete constraints: e.g., remove the unique constraint on the EmailAddress column in Learners.
+
+    Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+    Insert rows:
+
+        Add the following rows into the Learners table:
+
+            (1, 'Chris', 'Smith', 'chris.smith@example.com', '1999-03-12')
+
+            (2, 'Maria', 'Clark', 'maria.clark@example.com', '2000-06-22')
+
+            (3, 'John', 'Doe', NULL, '1998-10-11')
+
+            (4, 'Anna', 'Brown', 'anna.brown@example.com', NULL)
+
+            (5, 'Olivia', 'Jones', 'olivia.jones@example.com', '2001-04-07')
+
+            (6, 'Liam', 'Miller', 'liam.miller@example.com', '1999-07-09')
+
+        Add the following rows into the Subjects table:
+
+            (1, 'Geometry 202', 'Ms. Laura', 'Mon/Wed 08:00-09:00')
+
+            (2, 'Shakespearean Drama', 'Mrs. Linda', 'Tue/Thu 10:00-11:30')
+
+            (3, 'Astrophysics 101', NULL, 'Wed/Fri 13:00-14:30')
+
+            (4, 'Inorganic Chemistry', 'Dr. Eric', NULL)
+
+            (5, 'Human Physiology', 'Dr. Alice', 'Tue/Thu 11:00-12:30')
+
+            (6, 'Ancient Civilizations', 'Mr. Sam', 'Mon/Wed 14:00-15:00')
+
+        Add the following rows into the Enrollments table:
+
+            (1, 1, 1, '2023-09-01')
+
+            (2, 2, 2, '2023-09-02')
+
+            (3, 3, 3, NULL)
+
+            (4, 4, 4, '2023-09-04')
+
+            (5, 5, 5, '2023-09-05')
+
+            (6, 6, 6, NULL)
+
+    Update rows:
+
+        Update the email of the learner with TraineeID 3 in the Learners table to 'john.doe@example.com'.
+
+        Update the schedule of the subject with SubjectID 4 in the Subjects table to 'Tue/Thu 09:00-10:30'.
+
+        Update the enrollment date of the enrollment with EnrollmentID 3 in the Enrollments table to '2023-09-03'.
+
+    Delete rows:
+
+        Delete the learner with TraineeID 6 from the Learners table.
+
+        Delete the subject with SubjectID 6 from the Subjects table.
+
+        Delete the enrollment with EnrollmentID 6 from the Enrollments table.

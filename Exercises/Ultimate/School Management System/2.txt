@@ -1,0 +1,143 @@
+Pupils table:
+
+    StudentID (int, Primary Key)
+
+    FirstName (varchar(50), not null)
+
+    LastName (varchar(50), not null)
+
+    Email (varchar(110), unique, not null)
+
+    DateOfBirth (date)
+
+Classes table:
+
+    ClassID (int, Primary Key)
+
+    ClassTitle (varchar(90), not null)
+
+    TeacherName (varchar(90))
+
+    Timing (varchar(40))
+
+Enrollments table:
+
+    EnrollmentID (int, Primary Key)
+
+    StudentID (int, Foreign Key references Pupils(StudentID))
+
+    ClassID (int, Foreign Key references Classes(ClassID))
+
+    EnrollmentDate (date, default to current date)
+
+Functions:
+
+    FetchOpenClasses: Returns classes a pupil is not currently enrolled in.
+
+    ComputeAttendanceRate: Calculates the attendance rate based on attended sessions.
+
+    GetStudentFullName: Concatenates first name and last name to return the full name of a student.
+
+    FindClassesByTeacher: Returns classes taught by a specific teacher.
+
+    GetEnrolledClasses: Returns classes a pupil is enrolled in.
+
+    Utilize CASE: Use a CASE statement in one of the functions, e.g., in ComputeAttendanceRate, use CASE to verify attendance percentage and apply different grading scales.
+
+    Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in ComputeAttendanceRate.
+
+Procedures (use transactions):
+
+    FetchAbsentStudents: Retrieves students who have missed sessions.
+
+    AddNewClass: Adds a new class into the Classes table.
+
+    UpdateStudentInfo: Updates the information of an existing student.
+
+Views:
+
+    Create a view to display all enrollments along with student details.
+
+    Create another view to show all open classes along with their teachers.
+
+Triggers:
+
+    Create a trigger to automatically update the Enrollments table when a new record is added to the Classes table.
+
+    Create another trigger to log changes when a student's information is updated in the Pupils table.
+
+ALTER Tasks:
+
+    Modify the Classes table to add a new column for RoomNo.
+
+    Alter the ComputeAttendanceRate function to add new logic for holiday periods.
+
+    Alter constraints: e.g., change the Email column in Pupils to be nullable.
+
+DELETE Tasks:
+
+    Delete constraints: e.g., remove the unique constraint on the Email column in Pupils.
+
+    Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+    Insert rows:
+
+        Add the following rows into the Pupils table:
+
+            (1, 'Alan', 'Wright', 'alan.wright@example.com', '2000-04-12')
+
+            (2, 'Sophia', 'White', 'sophia.white@example.com', '2001-09-19')
+
+            (3, 'James', 'Black', NULL, '1999-11-03')
+
+            (4, 'Hannah', 'Green', 'hannah.green@example.com', NULL)
+
+            (5, 'Eva', 'Blue', 'eva.blue@example.com', '2002-10-21')
+
+            (6, 'Ethan', 'Red', 'ethan.red@example.com', '2000-06-25')
+
+        Add the following rows into the Classes table:
+
+            (1, 'Algebra 201', 'Mr. John', 'Tue/Thu 09:00-10:00')
+
+            (2, 'World Literature', 'Ms. Carol', 'Wed/Fri 11:00-12:30')
+
+            (3, 'Quantum Physics', NULL, 'Tue/Thu 14:00-15:30')
+
+            (4, 'Organic Chemistry', 'Dr. Grey', NULL)
+
+            (5, 'Anatomy 101', 'Dr. Violet', 'Wed/Fri 10:00-11:30')
+
+            (6, 'Modern History', 'Mr. Paul', 'Tue/Thu 12:00-13:00')
+
+        Add the following rows into the Enrollments table:
+
+            (1, 1, 1, '2023-10-01')
+
+            (2, 2, 2, '2023-10-02')
+
+            (3, 3, 3, NULL)
+
+            (4, 4, 4, '2023-10-04')
+
+            (5, 5, 5, '2023-10-05')
+
+            (6, 6, 6, NULL)
+
+    Update rows:
+
+        Update the email of the student with StudentID 3 in the Pupils table to 'james.black@example.com'.
+
+        Update the timing of the class with ClassID 4 in the Classes table to 'Tue/Thu 10:00-11:30'.
+
+        Update the enrollment date of the enrollment with EnrollmentID 3 in the Enrollments table to '2023-10-03'.
+
+    Delete rows:
+
+        Delete the student with StudentID 6 from the Pupils table.
+
+        Delete the class with ClassID 6 from the Classes table.
+
+        Delete the enrollment with EnrollmentID 6 from the Enrollments table.

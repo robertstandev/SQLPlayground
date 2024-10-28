@@ -1,0 +1,142 @@
+Transport Management System:
+Tables:
+TransitVehicles table:
+
+TransitID (int, Primary Key)
+
+LicensePlate (varchar(80), not null, unique)
+
+VehicleType (varchar(70), not null)
+
+OwnerEmail (varchar(150), unique, not null)
+
+AcquisitionDate (date)
+
+MaintenanceDate (date)
+
+RoutesInfo table:
+
+RouteCode (int, Primary Key)
+
+RouteLabel (varchar(110), not null)
+
+DriverName (varchar(120))
+
+TimingDetails (varchar(80))
+
+RouteLength (int)
+
+JourneyRecords table:
+
+RecordID (int, Primary Key)
+
+TransitID (int, Foreign Key references TransitVehicles(TransitID))
+
+RouteCode (int, Foreign Key references RoutesInfo(RouteCode))
+
+RecordDate (date, default to current date)
+
+Functions:
+GetUnallocatedRoutes: Returns routes a vehicle is not currently allocated to.
+
+ComputeFuelEfficiency: Computes the fuel efficiency based on distance covered.
+
+GetTransitDescription: Concatenates type and license plate to return a full description of a transit vehicle.
+
+FetchRoutesByDriver: Returns routes assigned to a specific driver.
+
+RetrieveAssignedRoutes: Returns routes a transit vehicle is assigned to.
+
+Utilize CASE: Incorporate a CASE statement in one of the functions, e.g., in ComputeFuelEfficiency, use CASE to check the efficiency rate and categorize it.
+
+Transform Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in ComputeFuelEfficiency.
+
+Procedures (use transactions):
+FetchInactiveVehicles: Retrieves vehicles that have not been on any journeys.
+
+CreateNewRoute: Adds a new route into the RoutesInfo table.
+
+ModifyVehicleInfo: Updates the information of an existing vehicle.
+
+Views:
+Create a view to show all journey records along with vehicle details.
+
+Create another view to show all available routes along with their drivers.
+
+Triggers:
+Create a trigger to automatically update the JourneyRecords table when a new record is added to the RoutesInfo table.
+
+Create another trigger to log changes when a vehicle's information is updated in the TransitVehicles table.
+
+ALTER Tasks:
+Modify the RoutesInfo table to add a new column for EstimatedTime.
+
+Alter the ComputeFuelEfficiency function to add new logic for stopovers.
+
+Alter constraints: e.g., change the OwnerEmail column in TransitVehicles to be nullable.
+
+DELETE Tasks:
+Delete constraints: e.g., remove the unique constraint on the OwnerEmail column in TransitVehicles.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows:
+
+Add the following rows into the TransitVehicles table:
+
+(1, 'XYZ123', 'SUV', 'suv@example.com', '2022-03-10', '2023-11-25')
+
+(2, 'LMN789', 'Sedan', 'sedan@example.com', '2022-06-14', '2023-09-12')
+
+(3, 'QRS456', 'Truck', NULL, '2021-01-20', '2023-08-05')
+
+(4, 'TUV123', 'Electric', 'electric@example.com', NULL, '2023-07-29')
+
+(5, 'WXY456', 'Bus', 'bus@example.com', '2023-10-21', '2023-06-30')
+
+(6, 'ABC789', 'Van', 'van@example.com', '2021-08-15', '2023-07-01')
+
+Add the following rows into the RoutesInfo table:
+
+(1, 'Path A', 'Mr. Smith', 'Mon/Wed/Fri 08:00-09:00', 50)
+
+(2, 'Path B', 'Ms. Johnson', 'Tue/Thu 10:00-11:30', 25)
+
+(3, 'Path C', NULL, 'Mon/Wed 13:00-14:30', 35)
+
+(4, 'Path D', 'Dr. Watson', NULL, 55)
+
+(5, 'Path E', 'Dr. Cooper', 'Tue/Thu 09:00-10:30', 70)
+
+(6, 'Path F', 'Mr. Brown', 'Mon/Wed/Fri 11:00-12:00', 45)
+
+Add the following rows into the JourneyRecords table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the vehicle owner with TransitID 3 in the TransitVehicles table to 'truck@example.com'.
+
+Update the timing of the route with RouteCode 4 in the RoutesInfo table to 'Mon/Wed 09:00-10:30'.
+
+Update the record date of the journey record with RecordID 3 in the JourneyRecords table to '2024-09-03'.
+
+Delete rows:
+
+Delete the vehicle with TransitID 6 from the TransitVehicles table.
+
+Delete the route with RouteCode 6 from the RoutesInfo table.
+
+Delete the journey record with RecordID 6 from the JourneyRecords table.

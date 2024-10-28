@@ -1,0 +1,145 @@
+Tables:
+
+    Patients table:
+
+        PatientID (int, Primary Key)
+
+        FirstName (varchar(60), not null)
+
+        LastName (varchar(60), not null)
+
+        EmailAddress (varchar(120), unique, not null)
+
+        DateOfBirth (date)
+
+    Departments table:
+
+        DepartmentID (int, Primary Key)
+
+        DepartmentName (varchar(100), not null)
+
+        HeadOfDepartment (varchar(100))
+
+        OperationHours (varchar(50))
+
+    Appointments table:
+
+        AppointmentID (int, Primary Key)
+
+        PatientID (int, Foreign Key references Patients(PatientID))
+
+        DepartmentID (int, Foreign Key references Departments(DepartmentID))
+
+        AppointmentDate (date, default to current date)
+
+Functions:
+
+    GetAvailableDepartments: Returns departments a patient doesn't have an appointment with.
+
+    CalculateTreatmentProgress: Calculates the treatment progress based on the number of follow-up appointments attended.
+
+    GetPatientFullName: Concatenates first name and last name to return the full name of a patient.
+
+    GetDepartmentsByHead: Returns departments managed by a specific head of department.
+
+    GetAppointments: Returns appointments a patient has registered for.
+
+    Use CASE: Incorporate a CASE statement in one of the functions, e.g., in CalculateTreatmentProgress, use CASE to check the progress percentage and apply different stages.
+
+    Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in CalculateTreatmentProgress.
+
+Procedures (use transactions):
+
+    RetrieveAbsentPatients: Retrieves patients who have missed follow-up appointments.
+
+    AddNewDepartment: Adds a new department into the Departments table.
+
+    UpdatePatientInfo: Updates the information of an existing patient.
+
+Views:
+
+    Create a view to show all appointments along with patient details.
+
+    Create another view to show all available departments along with their heads.
+
+Triggers:
+
+    Create a trigger to automatically update the Appointments table when a new record is added to the Departments table.
+
+    Create another trigger to log changes when a patient’s information is updated in the Patients table.
+
+ALTER Tasks:
+
+    Modify the Departments table to add a new column for RoomNumber.
+
+    Alter the CalculateTreatmentProgress function to add new logic for holiday periods.
+
+    Alter constraints: e.g., change the EmailAddress column in Patients to be nullable.
+
+DELETE Tasks:
+
+    Delete constraints: e.g., remove the unique constraint on the EmailAddress column in Patients.
+
+    Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+    Insert rows:
+
+        Add the following rows into the Patients table:
+
+            (1, 'John', 'Doe', 'john.doe@hospital.com', '1985-07-21')
+
+            (2, 'Jane', 'Smith', 'jane.smith@hospital.com', '1990-03-15')
+
+            (3, 'Michael', 'Brown', NULL, '1975-11-30')
+
+            (4, 'Emily', 'Jones', 'emily.jones@hospital.com', NULL)
+
+            (5, 'Sarah', 'Taylor', 'sarah.taylor@hospital.com', '1988-09-19')
+
+            (6, 'David', 'Clark', 'david.clark@hospital.com', '1982-01-25')
+
+        Add the following rows into the Departments table:
+
+            (1, 'Cardiology', 'Dr. Wilson', 'Mon/Wed/Fri 10:00-11:00')
+
+            (2, 'Neurology', 'Dr. Adams', 'Tue/Thu 12:00-13:30')
+
+            (3, 'Orthopedics', NULL, 'Mon/Wed 14:00-15:30')
+
+            (4, 'Pediatrics', 'Dr. Brown', NULL)
+
+            (5, 'Oncology', 'Dr. Green', 'Tue/Thu 10:00-11:30')
+
+            (6, 'Dermatology', 'Dr. White', 'Mon/Wed/Fri 12:00-13:00')
+
+        Add the following rows into the Appointments table:
+
+            (1, 1, 1, '2024-09-01')
+
+            (2, 2, 2, '2024-09-02')
+
+            (3, 3, 3, NULL)
+
+            (4, 4, 4, '2024-09-04')
+
+            (5, 5, 5, '2024-09-05')
+
+            (6, 6, 6, NULL)
+
+    Update rows:
+
+        Update the email of the patient with PatientID 3 in the Patients table to 'michael.brown@hospital.com'.
+
+        Update the operation hours of the department with DepartmentID 4 in the Departments table to 'Mon/Wed 10:00-11:30'.
+
+        Update the appointment date of the appointment with AppointmentID 3 in the Appointments table to '2024-09-03'.
+
+    Delete rows:
+
+        Delete the patient with PatientID 6 from the Patients table.
+
+        Delete the department with DepartmentID 6 from the Departments table.
+
+        Delete the appointment with AppointmentID 6 from the Appointments table.

@@ -1,0 +1,145 @@
+Tables:
+
+Customers table:
+
+ClientID (int, Primary Key)
+
+GivenName (varchar(50), not null)
+
+Surname (varchar(50), not null)
+
+EmailContact (varchar(100), unique, not null)
+
+Birthdate (date)
+
+BankAccounts table:
+
+AccountID (int, Primary Key)
+
+AccountType (varchar(80), not null)
+
+Manager (varchar(80))
+
+AccountInfo (varchar(40))
+
+FinancialTransactions table:
+
+TxID (int, Primary Key)
+
+ClientID (int, Foreign Key references Customers(ClientID))
+
+AccountID (int, Foreign Key references BankAccounts(AccountID))
+
+TxDate (date, default to current date)
+
+Functions:
+
+FindUnlinkedAccounts: Returns accounts a client is not linked to.
+
+TransactionRate: Computes the transaction rate based on the number of transactions made.
+
+ClientFullName: Combines given name and surname to return the full name of a client.
+
+AccountsByManager: Lists accounts managed by a specific manager.
+
+LinkedAccounts: Shows accounts a client is linked to.
+
+Use CASE: Incorporate a CASE statement in one of the functions, e.g., in TransactionRate, use CASE to apply different fee structures.
+
+Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in TransactionRate.
+
+Procedures (use transactions):
+
+FindInactiveClients: Finds clients with no recent financial activity.
+
+InsertNewAccount: Adds a new account into the BankAccounts table.
+
+ModifyClient: Updates the details of an existing client.
+
+Views:
+
+Create a view to show all financial transactions with client details.
+
+Create another view to show all available accounts with their managers.
+
+Triggers:
+
+Create a trigger to automatically update the FinancialTransactions table when a new record is added to the BankAccounts table.
+
+Create another trigger to log changes when a client’s information is updated in the Customers table.
+
+ALTER Tasks:
+
+Modify the BankAccounts table to add a new column for BranchID.
+
+Alter the TransactionRate function to incorporate new logic for transaction holidays.
+
+Alter constraints: e.g., change the EmailContact column in Customers to be nullable.
+
+DELETE Tasks:
+
+Delete constraints: e.g., remove the unique constraint on the EmailContact column in Customers.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+Insert rows:
+
+Add the following rows into the Customers table:
+
+(1, 'Chris', 'Anderson', 'chris.anderson@example.com', '1985-07-15')
+
+(2, 'Pat', 'Thompson', 'pat.thompson@example.com', '1990-09-22')
+
+(3, 'Alex', 'Harrison', NULL, '1975-01-12')
+
+(4, 'Taylor', 'Martin', 'taylor.martin@example.com', NULL)
+
+(5, 'Jordan', 'Davis', 'jordan.davis@example.com', '1993-04-25')
+
+(6, 'Morgan', 'Lewis', 'morgan.lewis@example.com', '1980-11-03')
+
+Add the following rows into the BankAccounts table:
+
+(1, 'Savings', 'Mrs. Taylor', 'Long-term Savings')
+
+(2, 'Current', 'Mr. Roberts', 'Day-to-Day Transactions')
+
+(3, 'Investment', NULL, 'Market Investments')
+
+(4, 'Retirement', 'Dr. Johnson', NULL)
+
+(5, 'Corporate', 'Mr. Green', 'Business Account')
+
+(6, 'Credit', 'Mr. Adams', 'Credit Line')
+
+Add the following rows into the FinancialTransactions table:
+
+(1, 1, 1, '2024-11-01')
+
+(2, 2, 2, '2024-11-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-11-04')
+
+(5, 5, 5, '2024-11-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the client with ClientID 3 in the Customers table to 'alex.harrison@example.com'.
+
+Update the details of the account with AccountID 4 in the BankAccounts table to 'Monthly Contributions'.
+
+Update the transaction date of the transaction with TxID 3 in the FinancialTransactions table to '2024-11-03'.
+
+Delete rows:
+
+Delete the client with ClientID 6 from the Customers table.
+
+Delete the account with AccountID 6 from the BankAccounts table.
+
+Delete the transaction with TxID 6 from the FinancialTransactions table.

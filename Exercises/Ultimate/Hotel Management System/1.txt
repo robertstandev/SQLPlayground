@@ -1,0 +1,136 @@
+Guests table:
+
+GuestID (int, Primary Key)
+
+FirstName (varchar(60), not null)
+
+LastName (varchar(60), not null)
+
+Email (varchar(120), unique, not null)
+
+DateOfBirth (date)
+
+Rooms table:
+
+RoomID (int, Primary Key)
+
+RoomType (varchar(100), not null)
+
+PricePerNight (decimal)
+
+Availability (varchar(50))
+
+Bookings table:
+
+BookingID (int, Primary Key)
+
+GuestID (int, Foreign Key references Guests(GuestID))
+
+RoomID (int, Foreign Key references Rooms(RoomID))
+
+BookingDate (date, default to current date)
+
+Functions
+GetAvailableRooms: Returns rooms a guest is not currently booked for.
+
+CalculateStayDuration: Calculates the duration of a guest's stay based on check-in and check-out dates.
+
+GetGuestFullName: Concatenates first name and last name to return the full name of a guest.
+
+GetRoomsByType: Returns rooms of a specific type.
+
+GetBookedRooms: Returns rooms a guest is booked for.
+
+Use CASE: Incorporate a CASE statement in one of the functions, e.g., in CalculateStayDuration, use CASE to check the duration and apply different rates.
+
+Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in CalculateStayDuration.
+
+Procedures (use transactions)
+RetrieveNonStayingGuests: Retrieves guests who have not booked any rooms.
+
+AddNewRoom: Adds a new room into the Rooms table.
+
+UpdateGuestInfo: Updates the information of an existing guest.
+
+Views
+Create a view to show all bookings along with guest details.
+
+Create another view to show all available rooms along with their types.
+
+Triggers
+Create a trigger to automatically update the Bookings table when a new record is added to the Rooms table.
+
+Create another trigger to log changes when a guest’s information is updated in the Guests table.
+
+ALTER Tasks
+Modify the Rooms table to add a new column for FloorNumber.
+
+Alter the CalculateStayDuration function to add new logic for peak periods.
+
+Alter constraints: e.g., change the Email column in Guests to be nullable.
+
+DELETE Tasks
+Delete constraints: e.g., remove the unique constraint on the Email column in Guests.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks
+Insert rows:
+
+Add the following rows into the Guests table:
+
+(1, 'John', 'Doe', 'john.doe@hotel.com', '1985-05-15')
+
+(2, 'Jane', 'Smith', 'jane.smith@hotel.com', '1990-08-22')
+
+(3, 'Michael', 'Brown', NULL, '1980-12-01')
+
+(4, 'Emily', 'Jones', 'emily.jones@hotel.com', NULL)
+
+(5, 'Sarah', 'Taylor', 'sarah.taylor@hotel.com', '1995-11-09')
+
+(6, 'David', 'Clark', 'david.clark@hotel.com', '1987-07-21')
+
+Add the following rows into the Rooms table:
+
+(1, 'Single Room', 50.00, 'Available')
+
+(2, 'Double Room', 75.00, 'Booked')
+
+(3, 'Suite', 150.00, 'Available')
+
+(4, 'Deluxe Suite', 200.00, 'Available')
+
+(5, 'Family Room', 100.00, 'Booked')
+
+(6, 'Executive Room', 175.00, 'Booked')
+
+Add the following rows into the Bookings table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the guest with GuestID 3 in the Guests table to 'michael.brown@hotel.com'.
+
+Update the availability of the room with RoomID 4 in the Rooms table to 'Booked'.
+
+Update the booking date of the booking with BookingID 3 in the Bookings table to '2024-09-03'.
+
+Delete rows:
+
+Delete the guest with GuestID 6 from the Guests table.
+
+Delete the room with RoomID 6 from the Rooms table.
+
+Delete the booking with BookingID 6 from the Bookings table.

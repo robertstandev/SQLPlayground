@@ -1,0 +1,143 @@
+    Students table:
+
+        LearnerID (int, Primary Key)
+
+        GivenName (varchar(60), not null)
+
+        FamilyName (varchar(60), not null)
+
+        ContactEmail (varchar(120), unique, not null)
+
+        BirthDate (date)
+
+    Courses table:
+
+        CourseID (int, Primary Key)
+
+        CourseTitle (varchar(100), not null)
+
+        InstructorName (varchar(100))
+
+        ScheduleDetails (varchar(50))
+
+    Registrations table:
+
+        RegistrationID (int, Primary Key)
+
+        LearnerID (int, Foreign Key references Students(LearnerID))
+
+        CourseID (int, Foreign Key references Courses(CourseID))
+
+        RegistrationDate (date, default to current date)
+
+Functions:
+
+    GetAvailableCourses: Returns courses a student is not currently registered for.
+
+    CalculateAttendanceRate: Calculates the attendance rate based on the number of classes attended.
+
+    GetLearnerFullName: Concatenates given name and family name to return the full name of a learner.
+
+    GetCoursesByInstructor: Returns courses taught by a specific instructor.
+
+    GetRegisteredCourses: Returns courses a student is registered for.
+
+    Use CASE: Incorporate a CASE statement in one of the functions, e.g., in CalculateAttendanceRate, use CASE to check the attendance percentage and apply different grading levels.
+
+    Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in CalculateAttendanceRate.
+
+Procedures (use transactions):
+
+    RetrieveAbsentLearners: Retrieves learners who have missed classes.
+
+    AddNewCourse: Adds a new course into the Courses table.
+
+    UpdateLearnerInfo: Updates the information of an existing learner.
+
+Views:
+
+    Create a view to show all registrations along with learner details.
+
+    Create another view to show all available courses along with their instructors.
+
+Triggers:
+
+    Create a trigger to automatically update the Registrations table when a new record is added to the Courses table.
+
+    Create another trigger to log changes when a learner’s information is updated in the Students table.
+
+ALTER Tasks:
+
+    Modify the Courses table to add a new column for RoomNumber.
+
+    Alter the CalculateAttendanceRate function to add new logic for holiday periods.
+
+    Alter constraints: e.g., change the ContactEmail column in Students to be nullable.
+
+DELETE Tasks:
+
+    Delete constraints: e.g., remove the unique constraint on the ContactEmail column in Students.
+
+    Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+    Insert rows:
+
+        Add the following rows into the Students table:
+
+            (1, 'John', 'Doe', 'john.doe@example.com', '2001-05-15')
+
+            (2, 'Jane', 'Smith', 'jane.smith@example.com', '2002-08-22')
+
+            (3, 'Michael', 'Brown', NULL, '2000-12-01')
+
+            (4, 'Emily', 'Jones', 'emily.jones@example.com', NULL)
+
+            (5, 'Sarah', 'Taylor', 'sarah.taylor@example.com', '2003-11-09')
+
+            (6, 'David', 'Clark', 'david.clark@example.com', '2001-07-21')
+
+        Add the following rows into the Courses table:
+
+            (1, 'Mathematics 101', 'Mr. Wilson', 'Mon/Wed/Fri 10:00-11:00')
+
+            (2, 'English Literature', 'Ms. Adams', 'Tue/Thu 12:00-13:30')
+
+            (3, 'Physics 101', NULL, 'Mon/Wed 14:00-15:30')
+
+            (4, 'Chemistry 101', 'Dr. Brown', NULL)
+
+            (5, 'Biology 101', 'Dr. Green', 'Tue/Thu 10:00-11:30')
+
+            (6, 'History 101', 'Mr. White', 'Mon/Wed/Fri 12:00-13:00')
+
+        Add the following rows into the Registrations table:
+
+            (1, 1, 1, '2024-09-01')
+
+            (2, 2, 2, '2024-09-02')
+
+            (3, 3, 3, NULL)
+
+            (4, 4, 4, '2024-09-04')
+
+            (5, 5, 5, '2024-09-05')
+
+            (6, 6, 6, NULL)
+
+    Update rows:
+
+        Update the email of the student with LearnerID 3 in the Students table to 'michael.brown@example.com'.
+
+        Update the schedule of the course with CourseID 4 in the Courses table to 'Mon/Wed 10:00-11:30'.
+
+        Update the registration date of the registration with RegistrationID 3 in the Registrations table to '2024-09-03'.
+
+    Delete rows:
+
+        Delete the student with LearnerID 6 from the Students table.
+
+        Delete the course with CourseID 6 from the Courses table.
+
+        Delete the registration with RegistrationID 6 from the Registrations table.

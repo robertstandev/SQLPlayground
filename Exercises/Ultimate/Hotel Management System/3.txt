@@ -1,0 +1,137 @@
+Tables
+Visitors table:
+
+VisitorID (int, Primary Key)
+
+FirstName (varchar(50), not null)
+
+LastName (varchar(50), not null)
+
+ContactEmail (varchar(100), unique, not null)
+
+DOB (date)
+
+Suites table:
+
+SuiteID (int, Primary Key)
+
+Type (varchar(80), not null)
+
+Rate (decimal)
+
+RoomStatus (varchar(50))
+
+Stays table:
+
+StayID (int, Primary Key)
+
+VisitorID (int, Foreign Key references Visitors(VisitorID))
+
+SuiteID (int, Foreign Key references Suites(SuiteID))
+
+DateOfBooking (date, default to current date)
+
+Functions
+ListAvailableSuites: Returns suites a visitor is not currently staying in.
+
+CalculateStayLength: Computes the duration of a visitor’s stay based on check-in and check-out dates.
+
+GetVisitorFullName: Combines first name and last name to return the full name of a visitor.
+
+GetSuitesByType: Returns suites of a specific type.
+
+ListBookedSuites: Returns suites a visitor has booked.
+
+Implement CASE: Use a CASE statement in one of the functions, e.g., in CalculateStayLength, use CASE to check the length of stay and apply different rates.
+
+Type Conversion: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in CalculateStayLength.
+
+Procedures (use transactions)
+FindVisitorsWithoutBookings: Retrieves visitors who haven’t booked any suites.
+
+AddNewSuite: Adds a new suite into the Suites table.
+
+EditVisitorDetails: Updates the information of an existing visitor.
+
+Views
+Create a view to show all stays along with visitor details.
+
+Create another view to show all available suites along with their types.
+
+Triggers
+Create a trigger to automatically update the Stays table when a new record is added to the Suites table.
+
+Create another trigger to log changes when a visitor’s information is updated in the Visitors table.
+
+ALTER Tasks
+Modify the Suites table to add a new column for Level.
+
+Alter the CalculateStayLength function to add new logic for holiday seasons.
+
+Alter constraints: e.g., change the ContactEmail column in Visitors to be nullable.
+
+DELETE Tasks
+Delete constraints: e.g., remove the unique constraint on the ContactEmail column in Visitors.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks
+Insert rows:
+
+Add the following rows into the Visitors table:
+
+(1, 'John', 'Doe', 'john.doe@hotel.com', '1985-05-15')
+
+(2, 'Jane', 'Smith', 'jane.smith@hotel.com', '1990-08-22')
+
+(3, 'Michael', 'Brown', NULL, '1980-12-01')
+
+(4, 'Emily', 'Jones', 'emily.jones@hotel.com', NULL)
+
+(5, 'Sarah', 'Taylor', 'sarah.taylor@hotel.com', '1995-11-09')
+
+(6, 'David', 'Clark', 'david.clark@hotel.com', '1987-07-21')
+
+Add the following rows into the Suites table:
+
+(1, 'Single', 50.00, 'Available')
+
+(2, 'Double', 75.00, 'Occupied')
+
+(3, 'Luxury', 150.00, 'Available')
+
+(4, 'Premium', 200.00, 'Available')
+
+(5, 'Family', 100.00, 'Occupied')
+
+(6, 'Business', 175.00, 'Occupied')
+
+Add the following rows into the Stays table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the visitor with VisitorID 3 in the Visitors table to 'michael.brown@hotel.com'.
+
+Update the room status of the suite with SuiteID 4 in the Suites table to 'Occupied'.
+
+Update the date of booking of the stay with StayID 3 in the Stays table to '2024-09-03'.
+
+Delete rows:
+
+Delete the visitor with VisitorID 6 from the Visitors table.
+
+Delete the suite with SuiteID 6 from the Suites table.
+
+Delete the stay with StayID 6 from the Stays table.

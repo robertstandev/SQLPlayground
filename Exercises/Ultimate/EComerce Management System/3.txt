@@ -1,0 +1,137 @@
+Tables
+Shoppers table:
+
+UserID (int, Primary Key)
+
+FirstName (varchar(75), not null)
+
+LastName (varchar(75), not null)
+
+ContactEmail (varchar(130), unique, not null)
+
+Birthdate (date)
+
+Inventory table:
+
+SKU (int, Primary Key)
+
+ProductName (varchar(120), not null)
+
+BrandName (varchar(120))
+
+ProductDescription (varchar(70))
+
+Transactions table:
+
+TransactionID (int, Primary Key)
+
+UserID (int, Foreign Key references Shoppers(UserID))
+
+SKU (int, Foreign Key references Inventory(SKU))
+
+TransactionDate (date, default to current date)
+
+Functions
+GetUnpurchasedItems: Returns items a shopper has not bought.
+
+ComputeDiscountLevel: Calculates discount based on the quantity or amount purchased.
+
+GetUserFullName: Concatenates first name and last name to return the full name of a shopper.
+
+GetItemsByBrand: Returns items provided by a specific brand.
+
+GetPurchasedItems: Returns items a shopper has bought.
+
+Use CASE: Incorporate a CASE statement in one of the functions, e.g., in ComputeDiscountLevel, use CASE to apply different discount levels based on the purchase amount.
+
+Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in ComputeDiscountLevel.
+
+Procedures (use transactions)
+IdentifyInactiveShoppers: Retrieves shoppers who haven't made any transactions recently.
+
+RegisterNewItem: Adds a new item into the Inventory table.
+
+ModifyUserInfo: Updates information of an existing user.
+
+Views
+Create a view to show all transactions along with shopper details.
+
+Create another view to show all available items along with their brands.
+
+Triggers
+Create a trigger to automatically update the Transactions table when a new record is added to the Inventory table.
+
+Create another trigger to log changes when a shopper’s information is updated in the Shoppers table.
+
+ALTER Tasks
+Modify the Inventory table to add a new column for StockLevel.
+
+Alter the ComputeDiscountLevel function to add new logic for seasonal discounts.
+
+Alter constraints: e.g., change the ContactEmail column in Shoppers to be nullable.
+
+DELETE Tasks
+Delete constraints: e.g., remove the unique constraint on the ContactEmail column in Shoppers.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks
+Insert rows:
+
+Add the following rows into the Shoppers table:
+
+(1, 'Liam', 'Miller', 'liam.miller@example.com', '1985-03-15')
+
+(2, 'Emma', 'Wilson', 'emma.wilson@example.com', '1990-07-22')
+
+(3, 'Noah', 'Davis', NULL, '1980-11-01')
+
+(4, 'Olivia', 'Garcia', 'olivia.garcia@example.com', NULL)
+
+(5, 'Ava', 'Martinez', 'ava.martinez@example.com', '1995-10-09')
+
+(6, 'Ethan', 'Hernandez', 'ethan.hernandez@example.com', '1987-06-21')
+
+Add the following rows into the Inventory table:
+
+(1, 'Gaming Laptop', 'GameTech', '16GB RAM, 1TB SSD')
+
+(2, 'Smartwatch', 'FitGear', '32GB Storage')
+
+(3, 'Tablet', NULL, '128GB Storage')
+
+(4, 'Bluetooth Speaker', 'SoundMax', NULL)
+
+(5, 'Smartphone', 'TechMobile', '256GB Storage')
+
+(6, 'Digital Camera', 'PhotoPro', '24MP, 4K Video')
+
+Add the following rows into the Transactions table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the shopper with UserID 3 in the Shoppers table to 'noah.davis@example.com'.
+
+Update the description of the product with SKU 4 in the Inventory table to 'Portable, Waterproof'.
+
+Update the transaction date of the transaction with TransactionID 3 in the Transactions table to '2024-09-03'.
+
+Delete rows:
+
+Delete the shopper with UserID 6 from the Shoppers table.
+
+Delete the product with SKU 6 from the Inventory table.
+
+Delete the transaction with TransactionID 6 from the Transactions table.

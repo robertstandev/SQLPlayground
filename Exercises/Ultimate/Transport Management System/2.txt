@@ -1,0 +1,143 @@
+Transport Management System:
+
+Tables:
+Fleet table:
+
+FleetID (int, Primary Key)
+
+RegNumber (varchar(70), not null, unique)
+
+VehicleModel (varchar(60), not null)
+
+OwnerContact (varchar(120), unique, not null)
+
+PurchaseDate (date)
+
+InspectionDate (date)
+
+Journeys table:
+
+JourneyID (int, Primary Key)
+
+PathName (varchar(100), not null)
+
+DriverFullName (varchar(100))
+
+Timing (varchar(60))
+
+Distance (int)
+
+Assignments table:
+
+AssignmentID (int, Primary Key)
+
+FleetID (int, Foreign Key references Fleet(FleetID))
+
+JourneyID (int, Foreign Key references Journeys(JourneyID))
+
+AssignmentDate (date, default to current date)
+
+Functions:
+GetUnassignedPaths: Returns paths a fleet is not currently assigned to.
+
+CalculateFuelUsage: Calculates the fuel usage based on mileage covered.
+
+GetFleetDescription: Concatenates model and registration number to return a full description of a fleet.
+
+GetPathsByDriver: Returns paths driven by a specific driver.
+
+GetAssignedPaths: Returns paths a fleet is assigned to.
+
+Use CASE: Incorporate a CASE statement in one of the functions, e.g., in CalculateFuelUsage, use CASE to check the fuel efficiency levels and apply different categories.
+
+Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in CalculateFuelUsage.
+
+Procedures (use transactions):
+RetrieveIdleFleets: Retrieves fleets that have not been on any journeys.
+
+AddNewPath: Adds a new path into the Journeys table.
+
+UpdateFleetInfo: Updates the information of an existing fleet.
+
+Views:
+Create a view to show all assignments along with fleet details.
+
+Create another view to show all available paths along with their drivers.
+
+Triggers:
+Create a trigger to automatically update the Assignments table when a new record is added to the Journeys table.
+
+Create another trigger to log changes when a fleet's information is updated in the Fleet table.
+
+ALTER Tasks:
+Modify the Journeys table to add a new column for Duration.
+
+Alter the CalculateFuelUsage function to add new logic for refueling periods.
+
+Alter constraints: e.g., change the OwnerContact column in Fleet to be nullable.
+
+DELETE Tasks:
+Delete constraints: e.g., remove the unique constraint on the OwnerContact column in Fleet.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows:
+
+Add the following rows into the Fleet table:
+
+(1, 'ABC123', 'Toyota', 'toyota@example.com', '2022-05-15', '2023-10-12')
+
+(2, 'XYZ789', 'Honda', 'honda@example.com', '2022-08-22', '2023-09-19')
+
+(3, 'DEF456', 'Ford', NULL, '2020-12-01', '2023-08-15')
+
+(4, 'GHI123', 'Tesla', 'tesla@example.com', NULL, '2023-07-10')
+
+(5, 'JKL456', 'Chevrolet', 'chevrolet@example.com', '2023-11-09', '2023-06-20')
+
+(6, 'MNO789', 'Nissan', 'nissan@example.com', '2021-07-21', '2023-05-18')
+
+Add the following rows into the Journeys table:
+
+(1, 'Path 101', 'Mr. Wilson', 'Mon/Wed/Fri 10:00-11:00', 50)
+
+(2, 'Path 202', 'Ms. Adams', 'Tue/Thu 12:00-13:30', 30)
+
+(3, 'Path 303', NULL, 'Mon/Wed 14:00-15:30', 45)
+
+(4, 'Path 404', 'Dr. Brown', NULL, 60)
+
+(5, 'Path 505', 'Dr. Green', 'Tue/Thu 10:00-11:30', 75)
+
+(6, 'Path 606', 'Mr. White', 'Mon/Wed/Fri 12:00-13:00', 40)
+
+Add the following rows into the Assignments table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the fleet owner with FleetID 3 in the Fleet table to 'ford@example.com'.
+
+Update the timing of the path with JourneyID 4 in the Journeys table to 'Mon/Wed 10:00-11:30'.
+
+Update the assignment date of the assignment with AssignmentID 3 in the Assignments table to '2024-09-03'.
+
+Delete rows:
+
+Delete the fleet with FleetID 6 from the Fleet table.
+
+Delete the path with JourneyID 6 from the Journeys table.
+
+Delete the assignment with AssignmentID 6 from the Assignments table.

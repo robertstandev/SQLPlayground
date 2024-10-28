@@ -1,0 +1,143 @@
+Scholars table:
+
+    ScholarID (int, Primary Key)
+
+    FirstName (varchar(50), not null)
+
+    LastName (varchar(50), not null)
+
+    EmailID (varchar(120), unique, not null)
+
+    DOB (date)
+
+Lessons table:
+
+    LessonID (int, Primary Key)
+
+    LessonTitle (varchar(105), not null)
+
+    LecturerName (varchar(105))
+
+    ClassTime (varchar(55))
+
+Enrollments table:
+
+    EnrollmentID (int, Primary Key)
+
+    ScholarID (int, Foreign Key references Scholars(ScholarID))
+
+    LessonID (int, Foreign Key references Lessons(LessonID))
+
+    EnrollmentDate (date, default to current date)
+
+Functions:
+
+    ListAvailableLessons: Returns lessons a scholar is not currently enrolled in.
+
+    ComputeParticipationRate: Calculates the participation rate based on attended classes.
+
+    GetFullScholarName: Concatenates first name and last name to return the full name of a scholar.
+
+    RetrieveLessonsByLecturer: Returns lessons taught by a specific lecturer.
+
+    ListEnrolledLessons: Returns lessons a scholar is enrolled in.
+
+    Apply CASE Logic: Use a CASE statement in one of the functions, e.g., in ComputeParticipationRate, use CASE to verify participation percentage and apply different grading scales.
+
+    ConvertDataTypes: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in ComputeParticipationRate.
+
+Procedures (use transactions):
+
+    RetrieveAbsentScholars: Retrieves scholars who have missed classes.
+
+    AddNewLesson: Adds a new lesson into the Lessons table.
+
+    UpdateScholarInfo: Updates the information of an existing scholar.
+
+Views:
+
+    Create a view to display all enrollments along with scholar details.
+
+    Create another view to show all available lessons along with their lecturers.
+
+Triggers:
+
+    Create a trigger to automatically update the Enrollments table when a new record is added to the Lessons table.
+
+    Create another trigger to log changes when a scholar's information is updated in the Scholars table.
+
+ALTER Tasks:
+
+    Modify the Lessons table to add a new column for RoomCode.
+
+    Alter the ComputeParticipationRate function to add new logic for vacation periods.
+
+    Alter constraints: e.g., change the EmailID column in Scholars to be nullable.
+
+DELETE Tasks:
+
+    Delete constraints: e.g., remove the unique constraint on the EmailID column in Scholars.
+
+    Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+    Insert rows:
+
+        Add the following rows into the Scholars table:
+
+            (1, 'Jessica', 'Baker', 'jessica.baker@example.com', '2000-02-14')
+
+            (2, 'Max', 'Carter', 'max.carter@example.com', '2001-07-19')
+
+            (3, 'Oliver', 'King', NULL, '1999-05-11')
+
+            (4, 'Lucy', 'Taylor', 'lucy.taylor@example.com', NULL)
+
+            (5, 'Lily', 'Scott', 'lily.scott@example.com', '2002-08-23')
+
+            (6, 'Lucas', 'Hill', 'lucas.hill@example.com', '2000-09-26')
+
+        Add the following rows into the Lessons table:
+
+            (1, 'Calculus 301', 'Dr. Martin', 'Mon/Wed 09:00-10:00')
+
+            (2, 'Greek Mythology', 'Mr. Henry', 'Tue/Thu 11:00-12:30')
+
+            (3, 'Thermodynamics', NULL, 'Mon/Wed 15:00-16:30')
+
+            (4, 'Analytical Chemistry', 'Dr. Taylor', NULL)
+
+            (5, 'Neurobiology', 'Dr. Smith', 'Mon/Wed 13:00-14:30')
+
+            (6, 'Medieval Studies', 'Prof. James', 'Tue/Thu 14:00-15:00')
+
+        Add the following rows into the Enrollments table:
+
+            (1, 1, 1, '2024-08-01')
+
+            (2, 2, 2, '2024-08-02')
+
+            (3, 3, 3, NULL)
+
+            (4, 4, 4, '2024-08-04')
+
+            (5, 5, 5, '2024-08-05')
+
+            (6, 6, 6, NULL)
+
+    Update rows:
+
+        Update the email of the scholar with ScholarID 3 in the Scholars table to 'oliver.king@example.com'.
+
+        Update the schedule of the lesson with LessonID 4 in the Lessons table to 'Tue/Thu 10:00-11:30'.
+
+        Update the enrollment date of the enrollment with EnrollmentID 3 in the Enrollments table to '2024-08-03'.
+
+    Delete rows:
+
+        Delete the scholar with ScholarID 6 from the Scholars table.
+
+        Delete the lesson with LessonID 6 from the Lessons table.
+
+        Delete the enrollment with EnrollmentID 6 from the Enrollments table.

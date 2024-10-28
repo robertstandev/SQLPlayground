@@ -1,0 +1,168 @@
+Archive Management System
+Tables:
+LibraryItems:
+
+ItemID (int, Primary Key)
+
+ItemTitle (varchar(125), not null)
+
+CreatorName (varchar(125))
+
+ReleaseYear (int)
+
+ItemType (varchar(60))
+
+LibraryMembers:
+
+MemberID (int, Primary Key)
+
+First_Name (varchar(75), not null)
+
+Last_Name (varchar(75), not null)
+
+Email_Address (varchar(160), unique, not null)
+
+RegistrationDate (date)
+
+BorrowingRecords:
+
+RecordID (int, Primary Key)
+
+MemberID (int, Foreign Key references LibraryMembers(MemberID))
+
+ItemID (int, Foreign Key references LibraryItems(ItemID))
+
+DateBorrowed (date, default to current date)
+
+Functions:
+FetchAvailableItems:
+
+Returns library items a member has not borrowed yet.
+
+CalculateLateFee:
+
+Calculates the fee for late returns based on overdue days.
+
+ConcatenateMemberName:
+
+Combines first name and last name to return a member's full name.
+
+RetrieveItemsByCreator:
+
+Returns items created by a specific individual.
+
+RetrieveBorrowedItems:
+
+Returns items a member has borrowed.
+
+Procedures (use transactions):
+GetOverdueItems:
+
+Retrieves items that are overdue.
+
+InsertNewItem:
+
+Adds a new item into the LibraryItems table.
+
+UpdateMemberDetails:
+
+Updates the details of an existing library member.
+
+Views:
+AllBorrowingsView:
+
+Displays all borrowing records along with member details.
+
+AvailableItemsView:
+
+Shows all available items along with their types.
+
+Triggers:
+MaintainBorrowRecordsTrigger:
+
+Automatically updates the BorrowingRecords table when a new record is added to the LibraryItems table.
+
+MonitorMemberUpdatesTrigger:
+
+Logs changes when a member's details are updated in the LibraryMembers table.
+
+ALTER Tasks:
+Modify LibraryItems table:
+
+Add a new column for LibraryCode (varchar(25)).
+
+Alter CalculateLateFee function:
+
+Add new logic for holiday periods.
+
+Alter constraints:
+
+Change the Email_Address column in LibraryMembers to be nullable.
+
+DELETE Tasks:
+Delete constraints:
+
+Remove the unique constraint on the Email_Address column in LibraryMembers.
+
+**Delete every table, function, procedure, trigger, etc., one by one to practice deletion in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows:
+
+Add the following rows into the LibraryMembers table:
+
+(1, 'Alex', 'Johnson', 'alex.johnson@example.com', '2022-03-15')
+
+(2, 'Maria', 'Fernandez', 'maria.fernandez@example.com', '2021-06-22')
+
+(3, 'Chris', 'Evans', NULL, '2020-10-01')
+
+(4, 'Jessica', 'Martin', 'jessica.martin@example.com', NULL)
+
+(5, 'Daniel', 'Lee', 'daniel.lee@example.com', '2023-02-09')
+
+(6, 'Sophia', 'Wong', 'sophia.wong@example.com', '2021-11-21')
+
+Add the following rows into the LibraryItems table:
+
+(1, 'The Catcher in the Rye', 'J.D. Salinger', 1951, 'Literary Fiction')
+
+(2, 'Brave New World', 'Aldous Huxley', 1932, 'Dystopian')
+
+(3, 'The Odyssey', 'Homer', -800, 'Epic')
+
+(4, 'Ulysses', 'James Joyce', 1922, 'Modernist Novel')
+
+(5, 'Crime and Punishment', 'Fyodor Dostoevsky', 1866, 'Philosophical Fiction')
+
+(6, 'Great Expectations', 'Charles Dickens', 1861, 'Classic')
+
+Add the following rows into the BorrowingRecords table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the member with MemberID 3 in the LibraryMembers table to 'chris.evans@example.com'.
+
+Update the type of the item with ItemID 4 in the LibraryItems table to 'Classic Literature'.
+
+Update the borrow date of the loan with RecordID 3 in the BorrowingRecords table to '2024-09-03'.
+
+Delete rows:
+
+Delete the member with MemberID 6 from the LibraryMembers table.
+
+Delete the item with ItemID 6 from the LibraryItems table.
+
+Delete the borrowing record with RecordID 6 from the BorrowingRecords table.

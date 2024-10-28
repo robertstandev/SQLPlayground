@@ -1,0 +1,145 @@
+Tables:
+
+    PatientsInfo table:
+
+        PatientIDNum (int, Primary Key)
+
+        GivenName (varchar(60), not null)
+
+        Surname (varchar(60), not null)
+
+        ContactEmail (varchar(120), unique, not null)
+
+        DOB (date)
+
+    Wards table:
+
+        WardIDNum (int, Primary Key)
+
+        WardName (varchar(100), not null)
+
+        Supervisor (varchar(100))
+
+        HoursOfOperation (varchar(50))
+
+    Visits table:
+
+        VisitIDNum (int, Primary Key)
+
+        PatientIDNum (int, Foreign Key references PatientsInfo(PatientIDNum))
+
+        WardIDNum (int, Foreign Key references Wards(WardIDNum))
+
+        DateOfVisit (date, default to current date)
+
+Functions:
+
+    FetchUnassignedWards: Returns wards a patient doesn't have a visit with.
+
+    ComputeHealingProgress: Calculates the healing progress based on the number of follow-up visits attended.
+
+    ConcatenatePatientName: Concatenates given name and surname to return the full name of a patient.
+
+    FetchWardsBySupervisor: Returns wards managed by a specific supervisor.
+
+    RetrieveVisits: Returns visits a patient has registered for.
+
+    Use CASE: Incorporate a CASE statement in one of the functions, e.g., in ComputeHealingProgress, use CASE to check the progress percentage and apply different stages.
+
+    Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in ComputeHealingProgress.
+
+Procedures (use transactions):
+
+    FindAbsentPatients: Retrieves patients who have missed follow-up visits.
+
+    InsertNewWard: Adds a new ward into the Wards table.
+
+    ModifyPatientData: Updates the information of an existing patient.
+
+Views:
+
+    Create a view to show all visits along with patient details.
+
+    Create another view to show all unassigned wards along with their supervisors.
+
+Triggers:
+
+    Create a trigger to automatically update the Visits table when a new record is added to the Wards table.
+
+    Create another trigger to log changes when a patient’s information is updated in the PatientsInfo table.
+
+ALTER Tasks:
+
+    Modify the Wards table to add a new column for RoomNumber.
+
+    Alter the ComputeHealingProgress function to add new logic for holiday periods.
+
+    Alter constraints: e.g., change the ContactEmail column in PatientsInfo to be nullable.
+
+DELETE Tasks:
+
+    Delete constraints: e.g., remove the unique constraint on the ContactEmail column in PatientsInfo.
+
+    Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+    Insert rows:
+
+        Add the following rows into the PatientsInfo table:
+
+            (1, 'Liam', 'Wilson', 'liam.wilson@hospital.com', '1985-07-21')
+
+            (2, 'Olivia', 'Davis', 'olivia.davis@hospital.com', '1990-03-15')
+
+            (3, 'Ethan', 'Brown', NULL, '1975-11-30')
+
+            (4, 'Sophia', 'Martinez', 'sophia.martinez@hospital.com', NULL)
+
+            (5, 'Isabella', 'Garcia', 'isabella.garcia@hospital.com', '1988-09-19')
+
+            (6, 'Lucas', 'Anderson', 'lucas.anderson@hospital.com', '1982-01-25')
+
+        Add the following rows into the Wards table:
+
+            (1, 'Cardiology', 'Dr. Smith', 'Mon/Wed/Fri 10:00-11:00')
+
+            (2, 'Neurology', 'Dr. Johnson', 'Tue/Thu 12:00-13:30')
+
+            (3, 'Orthopedics', NULL, 'Mon/Wed 14:00-15:30')
+
+            (4, 'Pediatrics', 'Dr. Lee', NULL)
+
+            (5, 'Oncology', 'Dr. White', 'Tue/Thu 10:00-11:30')
+
+            (6, 'Dermatology', 'Dr. Green', 'Mon/Wed/Fri 12:00-13:00')
+
+        Add the following rows into the Visits table:
+
+            (1, 1, 1, '2024-09-01')
+
+            (2, 2, 2, '2024-09-02')
+
+            (3, 3, 3, NULL)
+
+            (4, 4, 4, '2024-09-04')
+
+            (5, 5, 5, '2024-09-05')
+
+            (6, 6, 6, NULL)
+
+    Update rows:
+
+        Update the email of the patient with PatientIDNum 3 in the PatientsInfo table to 'ethan.brown@hospital.com'.
+
+        Update the operation hours of the ward with WardIDNum 4 in the Wards table to 'Mon/Wed 10:00-11:30'.
+
+        Update the visit date of the visit with VisitIDNum 3 in the Visits table to '2024-09-03'.
+
+    Delete rows:
+
+        Delete the patient with PatientIDNum 6 from the PatientsInfo table.
+
+        Delete the ward with WardIDNum 6 from the Wards table.
+
+        Delete the visit with VisitIDNum 6 from the Visits table.

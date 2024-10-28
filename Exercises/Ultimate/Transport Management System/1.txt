@@ -1,0 +1,139 @@
+Transport Management System:
+
+Tables:
+Vehicles table:
+
+VehicleID (int, Primary Key)
+
+PlateNumber (varchar(60), not null, unique)
+
+Model (varchar(60), not null)
+
+OwnerEmail (varchar(120), unique, not null)
+
+PurchaseDate (date)
+
+Routes table:
+
+RouteID (int, Primary Key)
+
+RouteName (varchar(100), not null)
+
+DriverName (varchar(100))
+
+Schedule (varchar(50))
+
+Trips table:
+
+TripID (int, Primary Key)
+
+VehicleID (int, Foreign Key references Vehicles(VehicleID))
+
+RouteID (int, Foreign Key references Routes(RouteID))
+
+TripDate (date, default to current date)
+
+Functions:
+GetAvailableRoutes: Returns routes a vehicle is not currently assigned to.
+
+CalculateMileageRate: Calculates the mileage rate based on distance covered.
+
+GetVehicleFullDescription: Concatenates model and plate number to return the full description of a vehicle.
+
+GetRoutesByDriver: Returns routes driven by a specific driver.
+
+GetAssignedRoutes: Returns routes a vehicle is assigned to.
+
+Use CASE: Incorporate a CASE statement in one of the functions, e.g., in CalculateMileageRate, use CASE to check the mileage percentage and apply different grading levels.
+
+Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in CalculateMileageRate.
+
+Procedures (use transactions):
+RetrieveVehiclesWithNoTrips: Retrieves vehicles that have not completed any trips.
+
+AddNewRoute: Adds a new route into the Routes table.
+
+UpdateVehicleInfo: Updates the information of an existing vehicle.
+
+Views:
+Create a view to show all trips along with vehicle details.
+
+Create another view to show all available routes along with their drivers.
+
+Triggers:
+Create a trigger to automatically update the Trips table when a new record is added to the Routes table.
+
+Create another trigger to log changes when a vehicle's information is updated in the Vehicles table.
+
+ALTER Tasks:
+Modify the Routes table to add a new column for Duration.
+
+Alter the CalculateMileageRate function to add new logic for maintenance periods.
+
+Alter constraints: e.g., change the OwnerEmail column in Vehicles to be nullable.
+
+DELETE Tasks:
+Delete constraints: e.g., remove the unique constraint on the OwnerEmail column in Vehicles.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows:
+
+Add the following rows into the Vehicles table:
+
+(1, 'ABC123', 'Toyota', 'toyota@example.com', '2022-05-15')
+
+(2, 'XYZ789', 'Honda', 'honda@example.com', '2022-08-22')
+
+(3, 'DEF456', 'Ford', NULL, '2020-12-01')
+
+(4, 'GHI123', 'Tesla', 'tesla@example.com', NULL)
+
+(5, 'JKL456', 'Chevrolet', 'chevrolet@example.com', '2023-11-09')
+
+(6, 'MNO789', 'Nissan', 'nissan@example.com', '2021-07-21')
+
+Add the following rows into the Routes table:
+
+(1, 'Route 101', 'Mr. Wilson', 'Mon/Wed/Fri 10:00-11:00')
+
+(2, 'Route 202', 'Ms. Adams', 'Tue/Thu 12:00-13:30')
+
+(3, 'Route 303', NULL, 'Mon/Wed 14:00-15:30')
+
+(4, 'Route 404', 'Dr. Brown', NULL)
+
+(5, 'Route 505', 'Dr. Green', 'Tue/Thu 10:00-11:30')
+
+(6, 'Route 606', 'Mr. White', 'Mon/Wed/Fri 12:00-13:00')
+
+Add the following rows into the Trips table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the vehicle owner with VehicleID 3 in the Vehicles table to 'ford@example.com'.
+
+Update the schedule of the route with RouteID 4 in the Routes table to 'Mon/Wed 10:00-11:30'.
+
+Update the trip date of the trip with TripID 3 in the Trips table to '2024-09-03'.
+
+Delete rows:
+
+Delete the vehicle with VehicleID 6 from the Vehicles table.
+
+Delete the route with RouteID 6 from the Routes table.
+
+Delete the trip with TripID 6 from the Trips table.

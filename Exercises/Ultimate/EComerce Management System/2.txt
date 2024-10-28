@@ -1,0 +1,137 @@
+Tables
+Clients table:
+
+BuyerID (int, Primary Key)
+
+FirstName (varchar(70), not null)
+
+LastName (varchar(70), not null)
+
+EmailAddress (varchar(150), unique, not null)
+
+Birthdate (date)
+
+ProductsInventory table:
+
+ItemID (int, Primary Key)
+
+ItemName (varchar(110), not null)
+
+VendorName (varchar(110))
+
+ItemDescription (varchar(60))
+
+Purchases table:
+
+PurchaseID (int, Primary Key)
+
+BuyerID (int, Foreign Key references Clients(BuyerID))
+
+ItemID (int, Foreign Key references ProductsInventory(ItemID))
+
+PurchaseDate (date, default to current date)
+
+Functions
+ListAvailableItems: Returns items a customer hasn't purchased yet.
+
+CalculateLoyaltyDiscount: Calculates discount based on the amount spent.
+
+GetBuyerFullName: Concatenates first name and last name to return full name of a buyer.
+
+GetItemsByVendor: Returns items supplied by a specific vendor.
+
+ListPurchasedItems: Returns items a customer has purchased.
+
+Use CASE: Incorporate a CASE statement in one of the functions, e.g., in CalculateLoyaltyDiscount, use CASE to apply different discount levels based on spend.
+
+Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in CalculateLoyaltyDiscount.
+
+Procedures (use transactions)
+FindInactiveClients: Retrieves clients who haven't made a purchase recently.
+
+AddNewItem: Adds a new item into the ProductsInventory table.
+
+UpdateClientDetails: Updates details of an existing client.
+
+Views
+Create a view to show all purchases along with client details.
+
+Create another view to show all available items along with their vendors.
+
+Triggers
+Create a trigger to automatically update the Purchases table when a new record is added to the ProductsInventory table.
+
+Create another trigger to log changes when a client’s information is updated in the Clients table.
+
+ALTER Tasks
+Modify the ProductsInventory table to add a new column for StockCount.
+
+Alter the CalculateLoyaltyDiscount function to add new logic for promotional periods.
+
+Alter constraints: e.g., change the EmailAddress column in Clients to be nullable.
+
+DELETE Tasks
+Delete constraints: e.g., remove the unique constraint on the EmailAddress column in Clients.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks
+Insert rows:
+
+Add the following rows into the Clients table:
+
+(1, 'Alex', 'Johnson', 'alex.johnson@example.com', '1985-05-15')
+
+(2, 'Jamie', 'Lee', 'jamie.lee@example.com', '1990-08-22')
+
+(3, 'Taylor', 'Martin', NULL, '1980-12-01')
+
+(4, 'Jordan', 'Carter', 'jordan.carter@example.com', NULL)
+
+(5, 'Casey', 'Patel', 'casey.patel@example.com', '1995-11-09')
+
+(6, 'Riley', 'Nguyen', 'riley.nguyen@example.com', '1987-07-21')
+
+Add the following rows into the ProductsInventory table:
+
+(1, 'Ultrabook', 'TechDeals', '16GB RAM, 1TB SSD')
+
+(2, 'Smartphone', 'GadgetWorld', '256GB Storage')
+
+(3, 'Tablet', NULL, '128GB Storage')
+
+(4, 'Earbuds', 'SoundWaves', NULL)
+
+(5, 'Smartwatch', 'WearTech', '64GB Storage')
+
+(6, 'DSLR Camera', 'PhotoGear', '20MP, 4K Video')
+
+Add the following rows into the Purchases table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the client with BuyerID 3 in the Clients table to 'taylor.martin@example.com'.
+
+Update the description of the item with ItemID 4 in the ProductsInventory table to 'Wireless, Noise Cancelling'.
+
+Update the purchase date of the purchase with PurchaseID 3 in the Purchases table to '2024-09-03'.
+
+Delete rows:
+
+Delete the client with BuyerID 6 from the Clients table.
+
+Delete the item with ItemID 6 from the ProductsInventory table.
+
+Delete the purchase with PurchaseID 6 from the Purchases table.

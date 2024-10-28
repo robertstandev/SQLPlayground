@@ -1,0 +1,137 @@
+Tables
+Clients table:
+
+ClientID (int, Primary Key)
+
+FirstName (varchar(60), not null)
+
+Surname (varchar(60), not null)
+
+EmailAddress (varchar(120), unique, not null)
+
+Birthdate (date)
+
+Accommodations table:
+
+AccommodationID (int, Primary Key)
+
+AccommodationType (varchar(100), not null)
+
+NightlyRate (decimal)
+
+Status (varchar(50))
+
+Reservations table:
+
+ReservationID (int, Primary Key)
+
+ClientID (int, Foreign Key references Clients(ClientID))
+
+AccommodationID (int, Foreign Key references Accommodations(AccommodationID))
+
+ReservationDate (date, default to current date)
+
+Functions
+FetchOpenRooms: Returns rooms a client is not currently booked for.
+
+ComputeStayDuration: Calculates the length of a client’s stay based on check-in and check-out dates.
+
+GetClientFullName: Combines first name and surname to return the full name of a client.
+
+FetchRoomsByType: Returns rooms of a specific type.
+
+FetchBookedRooms: Returns rooms a client has booked.
+
+Utilize CASE: Use a CASE statement in one of the functions, e.g., in ComputeStayDuration, use CASE to check the duration and apply different pricing rates.
+
+DataType Conversion: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in ComputeStayDuration.
+
+Procedures (use transactions)
+FindNonBookingClients: Retrieves clients who have not booked any rooms.
+
+RegisterNewAccommodation: Adds a new accommodation into the Accommodations table.
+
+ModifyClientInfo: Updates the information of an existing client.
+
+Views
+Create a view to show all reservations along with client details.
+
+Create another view to show all open rooms along with their types.
+
+Triggers
+Create a trigger to automatically update the Reservations table when a new record is added to the Accommodations table.
+
+Create another trigger to log changes when a client’s information is updated in the Clients table.
+
+ALTER Tasks
+Modify the Accommodations table to add a new column for Floor.
+
+Alter the ComputeStayDuration function to add new logic for peak seasons.
+
+Alter constraints: e.g., change the EmailAddress column in Clients to be nullable.
+
+DELETE Tasks
+Delete constraints: e.g., remove the unique constraint on the EmailAddress column in Clients.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks
+Insert rows:
+
+Add the following rows into the Clients table:
+
+(1, 'John', 'Doe', 'john.doe@hotel.com', '1985-05-15')
+
+(2, 'Jane', 'Smith', 'jane.smith@hotel.com', '1990-08-22')
+
+(3, 'Michael', 'Brown', NULL, '1980-12-01')
+
+(4, 'Emily', 'Jones', 'emily.jones@hotel.com', NULL)
+
+(5, 'Sarah', 'Taylor', 'sarah.taylor@hotel.com', '1995-11-09')
+
+(6, 'David', 'Clark', 'david.clark@hotel.com', '1987-07-21')
+
+Add the following rows into the Accommodations table:
+
+(1, 'Single Room', 50.00, 'Open')
+
+(2, 'Double Room', 75.00, 'Occupied')
+
+(3, 'Suite', 150.00, 'Open')
+
+(4, 'Deluxe Suite', 200.00, 'Open')
+
+(5, 'Family Room', 100.00, 'Occupied')
+
+(6, 'Executive Room', 175.00, 'Occupied')
+
+Add the following rows into the Reservations table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the client with ClientID 3 in the Clients table to 'michael.brown@hotel.com'.
+
+Update the status of the accommodation with AccommodationID 4 in the Accommodations table to 'Occupied'.
+
+Update the reservation date of the reservation with ReservationID 3 in the Reservations table to '2024-09-03'.
+
+Delete rows:
+
+Delete the client with ClientID 6 from the Clients table.
+
+Delete the accommodation with AccommodationID 6 from the Accommodations table.
+
+Delete the reservation with ReservationID 6 from the Reservations table.

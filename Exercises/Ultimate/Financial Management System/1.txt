@@ -1,0 +1,145 @@
+Tables:
+
+Clients table:
+
+ClientID (int, Primary Key)
+
+FirstName (varchar(60), not null)
+
+LastName (varchar(60), not null)
+
+EmailAddress (varchar(120), unique, not null)
+
+DateOfBirth (date)
+
+Accounts table:
+
+AccountID (int, Primary Key)
+
+AccountType (varchar(100), not null)
+
+AccountManager (varchar(100))
+
+AccountDetails (varchar(50))
+
+Transactions table:
+
+TransactionID (int, Primary Key)
+
+ClientID (int, Foreign Key references Clients(ClientID))
+
+AccountID (int, Foreign Key references Accounts(AccountID))
+
+TransactionDate (date, default to current date)
+
+Functions:
+
+GetAvailableAccounts: Returns accounts a client is not currently using.
+
+CalculateTransactionRate: Calculates the transaction rate based on the number of transactions made.
+
+GetClientFullName: Concatenates first name and last name to return the full name of a client.
+
+GetAccountsByManager: Returns accounts managed by a specific account manager.
+
+GetRegisteredAccounts: Returns accounts a client is registered for.
+
+Use CASE: Incorporate a CASE statement in one of the functions, e.g., in CalculateTransactionRate, use CASE to check the transaction percentage and apply different fee levels.
+
+Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in CalculateTransactionRate.
+
+Procedures (use transactions):
+
+RetrieveInactiveClients: Retrieves clients who have no recent transactions.
+
+AddNewAccount: Adds a new account into the Accounts table.
+
+UpdateClientInfo: Updates the information of an existing client.
+
+Views:
+
+Create a view to show all transactions along with client details.
+
+Create another view to show all available accounts along with their managers.
+
+Triggers:
+
+Create a trigger to automatically update the Transactions table when a new record is added to the Accounts table.
+
+Create another trigger to log changes when a client’s information is updated in the Clients table.
+
+ALTER Tasks:
+
+Modify the Accounts table to add a new column for BranchNumber.
+
+Alter the CalculateTransactionRate function to add new logic for transaction holidays.
+
+Alter constraints: e.g., change the EmailAddress column in Clients to be nullable.
+
+DELETE Tasks:
+
+Delete constraints: e.g., remove the unique constraint on the EmailAddress column in Clients.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+Insert rows:
+
+Add the following rows into the Clients table:
+
+(1, 'Alex', 'Johnson', 'alex.johnson@example.com', '1985-05-15')
+
+(2, 'Taylor', 'Smith', 'taylor.smith@example.com', '1992-08-22')
+
+(3, 'Jordan', 'Brown', NULL, '1980-12-01')
+
+(4, 'Jamie', 'Jones', 'jamie.jones@example.com', NULL)
+
+(5, 'Morgan', 'Taylor', 'morgan.taylor@example.com', '1995-11-09')
+
+(6, 'Charlie', 'Clark', 'charlie.clark@example.com', '1987-07-21')
+
+Add the following rows into the Accounts table:
+
+(1, 'Checking', 'Mr. Adams', 'Daily Transactions')
+
+(2, 'Savings', 'Ms. Baker', 'Monthly Savings')
+
+(3, 'Investment', NULL, 'Stock Market')
+
+(4, 'Retirement', 'Dr. Brown', NULL)
+
+(5, 'Business', 'Dr. Green', 'Business Growth')
+
+(6, 'Credit', 'Mr. White', 'Credit Line')
+
+Add the following rows into the Transactions table:
+
+(1, 1, 1, '2024-10-01')
+
+(2, 2, 2, '2024-10-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-10-04')
+
+(5, 5, 5, '2024-10-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the client with ClientID 3 in the Clients table to 'jordan.brown@example.com'.
+
+Update the details of the account with AccountID 4 in the Accounts table to 'Bi-Weekly Contributions'.
+
+Update the transaction date of the transaction with TransactionID 3 in the Transactions table to '2024-10-03'.
+
+Delete rows:
+
+Delete the client with ClientID 6 from the Clients table.
+
+Delete the account with AccountID 6 from the Accounts table.
+
+Delete the transaction with TransactionID 6 from the Transactions table.

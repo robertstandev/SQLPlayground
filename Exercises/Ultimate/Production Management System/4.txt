@@ -1,0 +1,135 @@
+Tables:
+Artisans table:
+
+ArtisanID (int, Primary Key)
+
+NameFirst (varchar(55), not null)
+
+NameLast (varchar(55), not null)
+
+EmailContact (varchar(110), unique, not null)
+
+DateOfBirth (date)
+
+Crafts table:
+
+CraftID (int, Primary Key)
+
+CraftTitle (varchar(85), not null)
+
+SupervisorName (varchar(85))
+
+TimeFrame (varchar(45))
+
+CraftLogs table:
+
+LogID (int, Primary Key)
+
+ArtisanID (int, Foreign Key references Artisans(ArtisanID))
+
+CraftID (int, Foreign Key references Crafts(CraftID))
+
+LogDate (date, default to current date)
+
+Functions:
+FetchAvailableCrafts: Returns crafts an artisan isn't currently assigned to.
+
+ComputeCraftEfficiency: Evaluates efficiency based on the quantity produced.
+
+ConcatenateName: Concatenates first name and last name to return the full name of an artisan.
+
+FetchCraftsBySupervisor: Returns crafts managed by a specific supervisor.
+
+FetchAssignedCrafts: Returns crafts an artisan is assigned to.
+
+IntegrateCASE: Incorporate a CASE statement in one of the functions, e.g., in ComputeCraftEfficiency, use CASE to assess efficiency and apply different grading scales.
+
+ChangeDataType: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in ComputeCraftEfficiency.
+
+Procedures (use transactions):
+IdentifyAbsentArtisans: Retrieves artisans who have missed their work sessions.
+
+InsertNewCraft: Adds a new craft to the Crafts table.
+
+UpdateArtisanInfo: Updates the details of an existing artisan.
+
+Views:
+Create a view to show all craft logs along with artisan details.
+
+Create another view to show all available crafts along with their supervisors.
+
+Triggers:
+Create a trigger to automatically update the CraftLogs table when a new record is added to the Crafts table.
+
+Create another trigger to log changes when an artisan’s details are updated in the Artisans table.
+
+ALTER Tasks:
+Modify the Crafts table to add a new column for WorkArea.
+
+Alter the ComputeCraftEfficiency function to add new logic for off-peak periods.
+
+Alter constraints: e.g., change the EmailContact column in Artisans to be nullable.
+
+DELETE Tasks:
+Delete constraints: e.g., remove the unique constraint on the EmailContact column in Artisans.
+
+Delete each table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows: Add the following rows into the Artisans table:
+
+(1, 'Paul', 'Green', 'paul.green@example.com', '1979-06-25')
+
+(2, 'Anna', 'Lee', 'anna.lee@example.com', '1987-10-13')
+
+(3, 'Simon', 'Smith', NULL, '1976-03-12')
+
+(4, 'Lisa', 'Brown', 'lisa.brown@example.com', NULL)
+
+(5, 'Ruth', 'Davis', 'ruth.davis@example.com', '1992-12-28')
+
+(6, 'Mark', 'Jones', 'mark.jones@example.com', '1980-05-05')
+
+Add the following rows into the Crafts table:
+
+(1, 'Oak Table', 'Ms. Taylor', 'Tue/Thu 08:00-09:30')
+
+(2, 'Maple Chair', 'Mr. Johnson', 'Mon/Wed 11:00-12:30')
+
+(3, 'Plastic Stool', NULL, 'Tue/Thu 14:00-15:30')
+
+(4, 'Iron Lamp', 'Dr. Evans', NULL)
+
+(5, 'Ceramic Pot', 'Ms. Murphy', 'Wed/Fri 10:00-11:30')
+
+(6, 'Pine Shelf', 'Mr. Hill', 'Mon/Wed/Fri 13:00-14:00')
+
+Add the following rows into the CraftLogs table:
+
+(1, 1, 1, '2024-07-01')
+
+(2, 2, 2, '2024-07-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-07-04')
+
+(5, 5, 5, '2024-07-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the artisan with ArtisanID 3 in the Artisans table to 'simon.smith@example.com'.
+
+Update the schedule of the craft with CraftID 4 in the Crafts table to 'Tue/Thu 09:30-11:00'.
+
+Update the log date of the craft log with LogID 3 in the CraftLogs table to '2024-07-03'.
+
+Delete rows:
+
+Delete the artisan with ArtisanID 6 from the Artisans table.
+
+Delete the craft with CraftID 6 from the Crafts table.
+
+Delete the craft log with LogID 6 from the CraftLogs table.

@@ -1,0 +1,135 @@
+Tables:
+Operators table:
+
+OperatorID (int, Primary Key)
+
+First_Name (varchar(50), not null)
+
+Surname (varchar(50), not null)
+
+Email (varchar(120), unique, not null)
+
+DOB (date)
+
+Productions table:
+
+ProductionID (int, Primary Key)
+
+ProductionName (varchar(90), not null)
+
+LeadName (varchar(90))
+
+Timetable (varchar(40))
+
+ProductionRecords table:
+
+RecordID (int, Primary Key)
+
+OperatorID (int, Foreign Key references Operators(OperatorID))
+
+ProductionID (int, Foreign Key references Productions(ProductionID))
+
+RecordedDate (date, default to current date)
+
+Functions:
+ListOpenProductions: Returns productions an operator is not currently assigned to.
+
+EvaluateProductionEfficiency: Calculates the efficiency based on the number of units completed.
+
+CombineFullName: Combines first name and surname to return the full name of an operator.
+
+ListProductionsByLead: Returns productions managed by a specific lead.
+
+ListAssignedProductions: Returns productions an operator is assigned to.
+
+ApplyCASE: Incorporate a CASE statement in one of the functions, e.g., in EvaluateProductionEfficiency, use CASE to check the efficiency percentage and apply different grading levels.
+
+ConvertDataType: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in EvaluateProductionEfficiency.
+
+Procedures (use transactions):
+FetchAbsentOperators: Retrieves operators who have missed their shifts.
+
+AddProduction: Adds a new production into the Productions table.
+
+ModifyOperatorDetails: Updates the information of an existing operator.
+
+Views:
+Create a view to show all production records along with operator details.
+
+Create another view to show all available productions along with their leads.
+
+Triggers:
+Create a trigger to automatically update the ProductionRecords table when a new record is added to the Productions table.
+
+Create another trigger to log changes when an operator’s information is updated in the Operators table.
+
+ALTER Tasks:
+Modify the Productions table to add a new column for Location.
+
+Alter the EvaluateProductionEfficiency function to add new logic for peak seasons.
+
+Alter constraints: e.g., change the Email column in Operators to be nullable.
+
+DELETE Tasks:
+Delete constraints: e.g., remove the unique constraint on the Email column in Operators.
+
+Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows: Add the following rows into the Operators table:
+
+(1, 'Alice', 'Green', 'alice.green@example.com', '1985-04-10')
+
+(2, 'Bob', 'White', 'bob.white@example.com', '1991-11-20')
+
+(3, 'Charlie', 'Black', NULL, '1983-02-15')
+
+(4, 'Daisy', 'Brown', 'daisy.brown@example.com', NULL)
+
+(5, 'Eve', 'Gray', 'eve.gray@example.com', '1998-08-30')
+
+(6, 'Frank', 'Blue', 'frank.blue@example.com', '1986-01-24')
+
+Add the following rows into the Productions table:
+
+(1, 'Mahogany Desk', 'Mr. Taylor', 'Mon/Wed/Fri 09:00-10:30')
+
+(2, 'Pine Bench', 'Ms. Cooper', 'Tue/Thu 13:00-14:30')
+
+(3, 'Plastic Chair', NULL, 'Mon/Wed 16:00-17:30')
+
+(4, 'Steel Cabinet', 'Dr. Harris', NULL)
+
+(5, 'Bamboo Rack', 'Dr. Robinson', 'Tue/Thu 11:00-12:30')
+
+(6, 'Aluminum Shelf', 'Mr. Parker', 'Mon/Wed/Fri 14:00-15:00')
+
+Add the following rows into the ProductionRecords table:
+
+(1, 1, 1, '2024-08-01')
+
+(2, 2, 2, '2024-08-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-08-04')
+
+(5, 5, 5, '2024-08-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the operator with OperatorID 3 in the Operators table to 'charlie.black@example.com'.
+
+Update the schedule of the production with ProductionID 4 in the Productions table to 'Mon/Wed 09:30-11:00'.
+
+Update the recorded date of the production record with RecordID 3 in the ProductionRecords table to '2024-08-03'.
+
+Delete rows:
+
+Delete the operator with OperatorID 6 from the Operators table.
+
+Delete the production with ProductionID 6 from the Productions table.
+
+Delete the production record with RecordID 6 from the ProductionRecords table.

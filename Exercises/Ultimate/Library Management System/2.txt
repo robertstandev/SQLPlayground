@@ -1,0 +1,168 @@
+Library Information System
+Tables:
+Catalog:
+
+CatalogID (int, Primary Key)
+
+BookTitle (varchar(120), not null)
+
+Author (varchar(120))
+
+YearPublished (int)
+
+Category (varchar(60))
+
+Patrons:
+
+PatronID (int, Primary Key)
+
+FirstName (varchar(70), not null)
+
+LastName (varchar(70), not null)
+
+ContactEmail (varchar(150), unique, not null)
+
+MembershipDate (date)
+
+BorrowRecords:
+
+BorrowID (int, Primary Key)
+
+PatronID (int, Foreign Key references Patrons(PatronID))
+
+CatalogID (int, Foreign Key references Catalog(CatalogID))
+
+BorrowDate (date, default to current date)
+
+Functions:
+GetUnborrowedBooks:
+
+Returns books a patron has not currently borrowed.
+
+ComputeLateFees:
+
+Calculates the late fee based on the number of overdue days.
+
+ConcatenatePatronName:
+
+Concatenates first name and last name to return the full name of a patron.
+
+FindBooksByAuthor:
+
+Returns books authored by a specific individual.
+
+ListBorrowedBooks:
+
+Returns books a patron has borrowed.
+
+Procedures (use transactions):
+RetrieveLateBooks:
+
+Retrieves books that are overdue.
+
+InsertNewBook:
+
+Adds a new book into the Catalog table.
+
+UpdatePatronDetails:
+
+Updates the information of an existing patron.
+
+Views:
+AllBorrowsView:
+
+Shows all borrow records along with patron details.
+
+UnborrowedBooksView:
+
+Shows all available books along with their categories.
+
+Triggers:
+RefreshBorrowRecordsTrigger:
+
+Automatically updates the BorrowRecords table when a new record is added to the Catalog table.
+
+AuditPatronUpdatesTrigger:
+
+Logs changes when a patron's information is updated in the Patrons table.
+
+ALTER Tasks:
+Modify Catalog table:
+
+Add a new column for ISBNNumber (varchar(20)).
+
+Alter ComputeLateFees function:
+
+Add new logic for holiday periods.
+
+Alter constraints:
+
+Change the ContactEmail column in Patrons to be nullable.
+
+DELETE Tasks:
+Delete constraints:
+
+Remove the unique constraint on the ContactEmail column in Patrons.
+
+**Delete every table, function, procedure, trigger, etc., one by one to practice deletion in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows:
+
+Add the following rows into the Patrons table:
+
+(1, 'Alex', 'Johnson', 'alex.johnson@example.com', '2022-03-15')
+
+(2, 'Maria', 'Fernandez', 'maria.fernandez@example.com', '2021-06-22')
+
+(3, 'Chris', 'Evans', NULL, '2020-10-01')
+
+(4, 'Jessica', 'Martin', 'jessica.martin@example.com', NULL)
+
+(5, 'Daniel', 'Lee', 'daniel.lee@example.com', '2023-02-09')
+
+(6, 'Sophia', 'Wong', 'sophia.wong@example.com', '2021-11-21')
+
+Add the following rows into the Catalog table:
+
+(1, 'The Catcher in the Rye', 'J.D. Salinger', 1951, 'Literary Fiction')
+
+(2, 'Brave New World', 'Aldous Huxley', 1932, 'Dystopian')
+
+(3, 'The Odyssey', 'Homer', -800, 'Epic')
+
+(4, 'Ulysses', 'James Joyce', 1922, 'Modernist Novel')
+
+(5, 'Crime and Punishment', 'Fyodor Dostoevsky', 1866, 'Philosophical Fiction')
+
+(6, 'Great Expectations', 'Charles Dickens', 1861, 'Classic')
+
+Add the following rows into the BorrowRecords table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the patron with PatronID 3 in the Patrons table to 'chris.evans@example.com'.
+
+Update the genre of the book with CatalogID 4 in the Catalog table to 'Classic Literature'.
+
+Update the borrow date of the loan with BorrowID 3 in the BorrowRecords table to '2024-09-03'.
+
+Delete rows:
+
+Delete the patron with PatronID 6 from the Patrons table.
+
+Delete the book with CatalogID 6 from the Catalog table.
+
+Delete the loan with BorrowID 6 from the BorrowRecords table.

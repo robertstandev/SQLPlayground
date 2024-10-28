@@ -1,0 +1,168 @@
+Archive Administration System
+Tables:
+MediaItems:
+
+ItemRef (int, Primary Key)
+
+Title (varchar(150), not null)
+
+Creator (varchar(150))
+
+YearOfRelease (int)
+
+Type (varchar(70))
+
+Subscribers:
+
+SubscriberID (int, Primary Key)
+
+GivenName (varchar(80), not null)
+
+Surname (varchar(80), not null)
+
+EmailAddress (varchar(170), unique, not null)
+
+SubscriptionDate (date)
+
+RentalRecords:
+
+RecordRef (int, Primary Key)
+
+SubscriberID (int, Foreign Key references Subscribers(SubscriberID))
+
+ItemRef (int, Foreign Key references MediaItems(ItemRef))
+
+DateRented (date, default to current date)
+
+Functions:
+ListUnrentedItems:
+
+Returns items a subscriber has not rented.
+
+ComputeOverdueCharges:
+
+Calculates overdue charges based on days late.
+
+CombineSubscriberName:
+
+Combines given name and surname to return a subscriber's full name.
+
+SearchItemsByCreator:
+
+Returns items by a specific creator.
+
+ListRentedItems:
+
+Returns items a subscriber has rented.
+
+Procedures (use transactions):
+FetchOverdueItems:
+
+Retrieves overdue items.
+
+AddNewItem:
+
+Adds a new item into the MediaItems table.
+
+ModifySubscriberDetails:
+
+Updates details of an existing subscriber.
+
+Views:
+BorrowRecordsView:
+
+Displays all borrowing records along with subscriber details.
+
+UnrentedItemsView:
+
+Shows all available items with their types.
+
+Triggers:
+SynchronizeBorrowRecordsTrigger:
+
+Automatically updates the RentalRecords table when a new record is added to the MediaItems table.
+
+TrackSubscriberChangesTrigger:
+
+Logs changes when subscriber details are updated in the Subscribers table.
+
+ALTER Tasks:
+Modify MediaItems table:
+
+Add a new column for CatalogNumber (varchar(30)).
+
+Alter ComputeOverdueCharges function:
+
+Add new logic for public holiday periods.
+
+Alter constraints:
+
+Change the EmailAddress column in Subscribers to be nullable.
+
+DELETE Tasks:
+Delete constraints:
+
+Remove the unique constraint on the EmailAddress column in Subscribers.
+
+**Delete every table, function, procedure, trigger, etc., one by one to practice deletion in SQL Server.
+
+Insert, Update, and Delete Tasks:
+Insert rows:
+
+Add the following rows into the Subscribers table:
+
+(1, 'Oliver', 'Stone', 'oliver.stone@example.com', '2023-04-15')
+
+(2, 'Emma', 'Thompson', 'emma.thompson@example.com', '2021-08-22')
+
+(3, 'Liam', 'Jones', NULL, '2020-09-01')
+
+(4, 'Ava', 'Wilson', 'ava.wilson@example.com', NULL)
+
+(5, 'Sophia', 'Robinson', 'sophia.robinson@example.com', '2023-03-09')
+
+(6, 'Mason', 'Brown', 'mason.brown@example.com', '2021-10-21')
+
+Add the following rows into the MediaItems table:
+
+(1, 'The Alchemist', 'Paulo Coelho', 1988, 'Novel')
+
+(2, '1984', 'George Orwell', 1949, 'Dystopian Fiction')
+
+(3, 'The Iliad', 'Homer', -800, 'Epic')
+
+(4, 'In Search of Lost Time', 'Marcel Proust', 1913, 'Modernist Literature')
+
+(5, 'The Brothers Karamazov', 'Fyodor Dostoevsky', 1880, 'Philosophical Novel')
+
+(6, 'David Copperfield', 'Charles Dickens', 1850, 'Classic Literature')
+
+Add the following rows into the RentalRecords table:
+
+(1, 1, 1, '2024-09-01')
+
+(2, 2, 2, '2024-09-02')
+
+(3, 3, 3, NULL)
+
+(4, 4, 4, '2024-09-04')
+
+(5, 5, 5, '2024-09-05')
+
+(6, 6, 6, NULL)
+
+Update rows:
+
+Update the email of the subscriber with SubscriberID 3 in the Subscribers table to 'liam.jones@example.com'.
+
+Update the type of the item with ItemRef 4 in the MediaItems table to 'Literary Fiction'.
+
+Update the rental date of the record with RecordRef 3 in the RentalRecords table to '2024-09-03'.
+
+Delete rows:
+
+Delete the subscriber with SubscriberID 6 from the Subscribers table.
+
+Delete the item with ItemRef 6 from the MediaItems table.
+
+Delete the rental record with RecordRef 6 from the RentalRecords table.

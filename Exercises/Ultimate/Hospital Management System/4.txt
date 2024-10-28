@@ -1,0 +1,145 @@
+Tables:
+
+    PatientDetails table:
+
+        PatientIDCode (int, Primary Key)
+
+        FirstGivenName (varchar(60), not null)
+
+        LastSurname (varchar(60), not null)
+
+        EmailID (varchar(120), unique, not null)
+
+        DateBirth (date)
+
+    DepartmentSections table:
+
+        SectionIDCode (int, Primary Key)
+
+        SectionName (varchar(100), not null)
+
+        DepartmentHead (varchar(100))
+
+        OperationalHours (varchar(50))
+
+    VisitRecords table:
+
+        VisitRecordID (int, Primary Key)
+
+        PatientIDCode (int, Foreign Key references PatientDetails(PatientIDCode))
+
+        SectionIDCode (int, Foreign Key references DepartmentSections(SectionIDCode))
+
+        VisitTimestamp (date, default to current date)
+
+Functions:
+
+    ListAvailableSections: Returns sections a patient doesn't have a visit with.
+
+    ComputeRecoveryRate: Calculates the recovery rate based on the number of follow-up visits attended.
+
+    ConcatenatePatientFullName: Concatenates first name and last name to return the full name of a patient.
+
+    ListSectionsByHead: Returns sections managed by a specific department head.
+
+    ListVisitRecords: Returns visit records a patient has registered for.
+
+    Use CASE: Incorporate a CASE statement in one of the functions, e.g., in ComputeRecoveryRate, use CASE to check the recovery percentage and apply different stages.
+
+    Convert Data Types: In one of the functions, convert text data to datetime or int, e.g., convert a text date to datetime in ComputeRecoveryRate.
+
+Procedures (use transactions):
+
+    IdentifyMissingPatients: Retrieves patients who have missed follow-up visits.
+
+    AddNewSection: Adds a new section into the DepartmentSections table.
+
+    RevisePatientInfo: Updates the information of an existing patient.
+
+Views:
+
+    Create a view to show all visit records along with patient details.
+
+    Create another view to show all available sections along with their department heads.
+
+Triggers:
+
+    Create a trigger to automatically update the VisitRecords table when a new record is added to the DepartmentSections table.
+
+    Create another trigger to log changes when a patient’s information is updated in the PatientDetails table.
+
+ALTER Tasks:
+
+    Modify the DepartmentSections table to add a new column for RoomNumber.
+
+    Alter the ComputeRecoveryRate function to add new logic for holiday periods.
+
+    Alter constraints: e.g., change the EmailID column in PatientDetails to be nullable.
+
+DELETE Tasks:
+
+    Delete constraints: e.g., remove the unique constraint on the EmailID column in PatientDetails.
+
+    Delete every table, function, procedure, trigger, etc., one by one to practice the deletion power in SQL Server.
+
+Insert, Update, and Delete Tasks:
+
+    Insert rows:
+
+        Add the following rows into the PatientDetails table:
+
+            (1, 'Benjamin', 'Miller', 'benjamin.miller@hospital.com', '1982-01-07')
+
+            (2, 'Charlotte', 'Thomas', 'charlotte.thomas@hospital.com', '1993-04-09')
+
+            (3, 'Jacob', 'Martinez', NULL, '1971-02-17')
+
+            (4, 'Ella', 'Rodriguez', 'ella.rodriguez@hospital.com', NULL)
+
+            (5, 'Amelia', 'Lopez', 'amelia.lopez@hospital.com', '1997-03-12')
+
+            (6, 'James', 'Hall', 'james.hall@hospital.com', '1989-11-24')
+
+        Add the following rows into the DepartmentSections table:
+
+            (1, 'Ophthalmology', 'Dr. Parker', 'Mon/Wed/Fri 09:00-11:00')
+
+            (2, 'Cardiology', 'Dr. Collins', 'Tue/Thu 11:30-13:30')
+
+            (3, 'Pulmonology', NULL, 'Mon/Wed 15:00-17:00')
+
+            (4, 'Dermatology', 'Dr. Phillips', NULL)
+
+            (5, 'Orthopedics', 'Dr. Evans', 'Tue/Thu 10:00-12:00')
+
+            (6, 'Neurology', 'Dr. Roberts', 'Mon/Wed/Fri 13:00-15:00')
+
+        Add the following rows into the VisitRecords table:
+
+            (1, 1, 1, '2024-11-01')
+
+            (2, 2, 2, '2024-11-02')
+
+            (3, 3, 3, NULL)
+
+            (4, 4, 4, '2024-11-04')
+
+            (5, 5, 5, '2024-11-05')
+
+            (6, 6, 6, NULL)
+
+    Update rows:
+
+        Update the email of the patient with PatientIDCode 3 in the PatientDetails table to 'jacob.martinez@hospital.com'.
+
+        Update the operational hours of the section with SectionIDCode 4 in the DepartmentSections table to 'Mon/Wed 10:00-12:00'.
+
+        Update the visit date of the visit with VisitRecordID 3 in the VisitRecords table to '2024-11-03'.
+
+    Delete rows:
+
+        Delete the patient with PatientIDCode 6 from the PatientDetails table.
+
+        Delete the section with SectionIDCode 6 from the DepartmentSections table.
+
+        Delete the visit with VisitRecordID 6 from the VisitRecords table.
