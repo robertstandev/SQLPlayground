@@ -1,4 +1,4 @@
-# SQLPlayground
+# ULTIMATE
 This folder provides a series of exercises to test your
 <br>
 DML(Data Manipulation Language - SELECT, INSERT, DELETE, UPDATE)
