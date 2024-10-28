@@ -7,4 +7,6 @@ This folder provides a series of exercises to test your
 <br>
 -TCL(Transaction Control Language - COMMIT, ROLLBACK) knowledge
 <br>
-Each file is independent. Choose your "theme" and do the exercises
+Each file is independent.
+<br>
+Choose your "theme" and do the exercises
