@@ -1,0 +1,7 @@
+﻿1. Câți angajați sunt în departamentul Engineering
+2. Suma tuturor comenzilor care contin produse rosii
+3. Clientul care a făcut cea mai mare comandă
+4. Cine este angajatul cu cel mai mare salairu
+5. Fiecare salesperson (Nume, prenume) in ce tari face el vanzari?
+6. Returneaza clientii care n au facut niciodata comenzi
+7. Clientii care nu au facut comenzi in 2012

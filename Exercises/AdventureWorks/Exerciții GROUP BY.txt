@@ -1,0 +1,1 @@
+1. Returnați într-un singur tabel pentru fiecare an care este cea mai mare valoare a unei comenzi, câte comenzi avem, care este valoarea medie a unei comenzi, câți clienți diferiți am avut, câți bani am câștigat, câte taxe am plătit, care este timpul cel mai lung de livrare.

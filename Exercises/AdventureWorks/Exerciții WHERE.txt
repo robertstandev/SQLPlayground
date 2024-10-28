@@ -1,0 +1,6 @@
+﻿1. Toate comenzile din martie 2012 (două modalități)
+2. Toate produsele care nu conțin cifre în nume, sunt negre și pot avea mărimile L și XL (două modalități)
+3. Toate persoanele care conțin apostrof în LastName
+4. Un singur câmp cu numele complet al persoanelor pentru care AdditionalContactInfo conține stringul 'weekend access'
+5. Toate ID-urile pare de produse
+6. Câți JobCandidates au în CV cuvântul 'manager'
