@@ -1,0 +1,82 @@
+USE AdventureWorks2022;  
+GO  
+SELECT p.FirstName, p.LastName  
+    ,ROW_NUMBER() OVER (ORDER BY a.PostalCode) AS "Row Number"  
+    ,RANK() OVER (ORDER BY a.PostalCode) AS Rank  
+    ,DENSE_RANK() OVER (ORDER BY a.PostalCode) AS "Dense Rank"  
+    ,NTILE(4) OVER (ORDER BY a.PostalCode) AS Quartile  
+    ,s.SalesYTD  
+    ,a.PostalCode  
+FROM Sales.SalesPerson AS s   
+    INNER JOIN Person.Person AS p   
+        ON s.BusinessEntityID = p.BusinessEntityID  
+    INNER JOIN Person.Address AS a   
+        ON a.AddressID = p.BusinessEntityID  
+WHERE TerritoryID IS NOT NULL AND SalesYTD <> 0;
+
+=========================================================
+--3rd value as ordered by
+SELECT 
+    *
+FROM 
+    [YourTableName]
+ORDER BY 
+    [YourColumnName] DESC
+OFFSET 2 ROWS FETCH NEXT 1 ROWS ONLY;
+
+
+
+OR
+
+
+
+WITH OrderedResults AS (
+    SELECT 
+        *,
+        ROW_NUMBER() OVER (ORDER BY [YourColumnName] DESC) AS RowNum
+    FROM 
+        [YourTableName]
+)
+SELECT 
+    *
+FROM 
+    OrderedResults
+WHERE 
+    RowNum = 3;
+
+
+=========================================================
+--UPDATE A VALUE WITH A CASE OF 1 TO MANY (ex 1 order without an adress but has a partnerID but that partnerID has multiple addresses and you need only 1)
+
+ -- Create the Orders table
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerName NVARCHAR(100),
+    TotalAmount DECIMAL(10, 2)
+);
+
+-- Create the OrderDetails table
+CREATE TABLE OrderDetails (
+    OrderDetailID INT PRIMARY KEY,
+    OrderID INT,
+    Amount DECIMAL(10, 2)
+);
+
+-- Insert sample data into the Orders table
+INSERT INTO Orders (OrderID, CustomerName, TotalAmount)
+VALUES (1, 'Alice', NULL), (2, 'Bob', NULL), (3, 'Charlie', NULL);
+
+-- Insert sample data into the OrderDetails table
+INSERT INTO OrderDetails (OrderDetailID, OrderID, Amount)
+VALUES (1, 1, 100.00), (2, 1, 150.00), (3, 2, 200.00), (4, 2, 50.00), (5, 3, 300.00);
+
+-- Update the TotalAmount column in the Orders table with the highest Amount from the OrderDetails table for each OrderID
+UPDATE Orders
+SET TotalAmount = (
+    SELECT TOP 1 Amount
+    FROM OrderDetails
+    WHERE OrderDetails.OrderID = Orders.OrderID
+    ORDER BY Amount DESC
+);
+
+ 

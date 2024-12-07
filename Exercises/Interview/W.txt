@@ -1,0 +1,43 @@
+solutii - pt - supply chain management
+Warehouse
+Transport
+Pallet
+==================================================================================================
+Baza de date (SQL SERVER) -> Servicii (IIS - Internet Information Services) -> Interfata (WMS)(BackOffice - PC) / FrontOffice - Scanner / Telefon
+=================================================================================================
+-Bayer:		Interfatare la import cu sistemul WEB pentru import comenzi din excel prin format JSON
+				Interfatare la Export cu : Proagrica (ERP) -> PRIN API -> format XML
+				
+-Terradent:	Interfatare import cu SeniorSoftware(ERP)(API) -> Format JSON
+		
+-KLG:		Interfatare import cu sistemul nostru de TMS(transport management system) -> primit date in format XML
+===================================================================================================
+EDI = Electronic Data Interchange
+=====================================================================================================
+Îmi puteți oferi mai multe detalii despre responsabilitățile de zi cu zi ale acestui rol? / Cum arata o zi obisnuita pe acest post?
+Care este procesul de onboarding?
+=================================================================================================
+Clustered Index
+    Definition: A clustered index determines the physical order of data in a table. There can only be one clustered index per table.
+    Characteristics: The data rows are stored in the order of the clustered index key. It’s effectively the table itself sorted by the index.
+    Use Case: Ideal for columns with unique values and where range queries are frequent.
+
+CREATE CLUSTERED INDEX IX_Clustered ON MyTable (ID); 
+===========================================================================
+Non-Clustered Index
+    Definition: A non-clustered index creates a separate structure within the table, containing pointers to the data. There can be multiple non-clustered indexes on a table.
+    Characteristics: It does not affect the physical order of the data in the table.
+    Use Case: Great for columns frequently used in searches and joins but where the physical order of data isn’t as critical.
+    
+CREATE NONCLUSTERED INDEX IX_NonClustered ON MyTable (Name);
+===========================================================================
+Columnstore Index
+    Definition: A columnstore index stores data in a columnar format.
+    Characteristics: Highly optimized for data warehousing and analytical queries.
+    Use Case: Best suited for large tables that are used in read-heavy environments.
+    
+CREATE CLUSTERED COLUMNSTORE INDEX CCI_SalesData ON SalesData;
+
+CREATE NONCLUSTERED COLUMNSTORE INDEX NCCI_SalesData ON SalesData (SalesID, SalesDate, ProductID, Quantity, SalesAmount);
+=============================================
+
