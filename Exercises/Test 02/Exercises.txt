@@ -1,0 +1,37 @@
+1.Extract the list of the most ordered items, sorted in descending order according to the quantity ordered.
+The report should contain the following colunns:
+ItemCode, ItemName, OrderedQuantity, AverageUnitPrice
+
+2.
+Extract lists of orders that have at least 3 items. The report must contain the following columns:
+OrderNumber, OrderDate, PartnerCode, PartnerName, NumberOfItems, TotalValue.
+
+3.
+Extract the list of partners who do not have their address stored in the database
+The report must contain the following columns:
+PartnerCode, PartnerName
+
+4.
+Extract the list of orders which do not have an invoice. The report must contain the following colunns:
+OrderNumber, OrderDate, PartnerCode, PartnerName
+
+5.
+Fill the column DeliveryAddressId from the table ClientOrder with the implicit address of the partner who place the order (where it is applicable). After that, execute the following select:
+Select OrderIt, DeliveryAddressId from ClientOrder order by 1,2
+
+6.
+Create an index which covers the interrogation below:
+select O.OrderNumber, O.OrderDate, sum(OD.Amount) TotalAmount
+from ClientOrder O
+join ClientOrderDetail OD on OD.OrderId = O.OrderId
+where OD.Itemid = 5
+group by O.OrderNumber, O.OrderDate
+
+7.
+Delete the invoices related to the order number "OrderNO_1"
+
+8.
+Create a stored procedure to fill the columns TotalConsumedQtty and RestQtty from the table ClientOrdserDetailXInvoiceDetail.
+The column TotalConsumedQtty must be completed with the sum of the invoiced quantity untill the moment mentioned in the respective order detail.
+The RestQtty column should represent the quantity left to invoice from the respective order detail.
+
